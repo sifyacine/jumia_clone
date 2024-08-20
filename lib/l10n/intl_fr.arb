@@ -1,0 +1,54 @@
+{
+  "globalTexts": {},
+  "onBoardingTexts": {
+    "onBoardingTitle1": "Choisissez votre produit",
+    "onBoardingTitle2": "Sélectionnez le mode de paiement",
+    "onBoardingTitle3": "Livraison à votre porte",
+    "onBoardingSubTitle1": "Bienvenue dans un monde de choix illimités - Votre produit parfait vous attend!",
+    "onBoardingSubTitle2": "Pour des transactions sans faille, choisissez votre chemin de paiement - Votre commodité, notre priorité!",
+    "onBoardingSubTitle3": "De notre porte à la vôtre - Livraison rapide, sécurisée et sans contact!"
+  },
+  "homeTexts": {
+    "homeAppbarTitle": "Bonne journée pour faire du shopping",
+    "homeAppbarSubTitle": "Sif Yacine"
+  },
+  "authenticationFormTexts": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "E-Mail",
+    "password": "Mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "username": "Nom d'utilisateur",
+    "phoneNo": "Numéro de téléphone",
+    "rememberMe": "Souviens-toi de moi",
+    "forgetPassword": "Mot de passe oublié?",
+    "signIn": "Se connecter",
+    "createAccount": "Créer un compte",
+    "orSignInWith": "ou se connecter avec",
+    "orSignUpWith": "ou s'inscrire avec",
+    "iAgreeTo": "J'accepte",
+    "privacyPolicy": "Politique de confidentialité",
+    "ternsOfUse": "Conditions d'utilisation",
+    "verificationCode": "Code de vérification",
+    "resendEmail": "Renvoyer l'email",
+    "resendEmailIn": "Renvoyer l'email dans",
+    "and": "et"
+  },
+  "authenticationHeadingsTexts": {
+    "loginTitle": "Bon retour",
+    "loginSubTitle": "Découvrez des choix illimités et une commodité inégalée",
+    "signupTitle": "Créons votre compte",
+    "forgetPasswordTitle": "Mot de passe oublié",
+    "forgetPasswordSubTitle": "Ne vous inquiétez pas, parfois les gens oublient aussi, entrez votre email et nous le ferons",
+    "changeYourPasswordTitle": "Email de réinitialisation du mot de passe envoyé",
+    "changeYourPasswordSubTitle": "La sécurité de votre compte est notre priorité! Nous vous avons envoyé un lien sécurisé à votre email",
+    "confirmEmail": "Vérifiez votre adresse email!",
+    "confirmEmailSubTitle": "Félicitations! Votre compte vous attend: vérifiez votre email pour commencer à faire du shopping et profitez-en!!",
+    "emailNotReceivedMessage": "Vous n'avez pas reçu l'email? Vérifiez votre courrier indésirable/spam ou renvoyez-le.",
+    "yourAccountCreatedTitle": "Votre compte a été créé avec succès!",
+    "yourAccountCreatedSudTitle": "Bienvenue dans votre destination de shopping ultime: votre compte est créé,",
+    "tContinue": "continuer",
+    "tSubmit": "Soumettre",
+    "tDone": "Terminé"
+  }
+}

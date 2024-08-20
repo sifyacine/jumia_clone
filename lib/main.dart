@@ -10,6 +10,6 @@ void main() {
   // Todo: Initialize Authentication
 
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 

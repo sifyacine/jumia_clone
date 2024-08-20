@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../features/personalization/controllers/local_controller.dart';
 import '../../../utils/constants/colors.dart';
 
 class TSettingsMenuTile extends StatelessWidget {
@@ -10,10 +12,10 @@ class TSettingsMenuTile extends StatelessWidget {
 
   const TSettingsMenuTile(
       {Key? key,
-      required this.icon,
-      required this.title,
-      required this.subtitle,
-      this.trailing, this.onTab})
+        required this.icon,
+        required this.title,
+        required this.subtitle,
+        this.trailing, this.onTab})
       : super(key: key);
 
   @override
@@ -34,6 +36,43 @@ class TSettingsMenuTile extends StatelessWidget {
       ),
       trailing: trailing,
       onTap: onTab,
+    );
+  }
+}
+
+
+class LanguageChangerTile extends StatefulWidget {
+  @override
+  _LanguageChangerTileState createState() => _LanguageChangerTileState();
+}
+
+class _LanguageChangerTileState extends State<LanguageChangerTile> {
+  String _selectedLanguage = 'en'; // Default language
+  final LocaleController localeController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return TSettingsMenuTile(
+      icon: Icons.language,
+      title: 'Language',
+      subtitle: 'Select your preferred language',
+      trailing: DropdownButton<String>(
+        value: _selectedLanguage,
+        items: [
+          DropdownMenuItem(value: 'en', child: Text('English')),
+          DropdownMenuItem(value: 'fr', child: Text('Français')),
+          DropdownMenuItem(value: 'ar', child: Text('العربية')),
+        ],
+        onChanged: (value) {
+          setState(() {
+            _selectedLanguage = value!;
+            localeController.changeLocale(value);
+          });
+        },
+      ),
+      onTab: () {
+        // Optional: Handle tap event if needed
+      },
     );
   }
 }

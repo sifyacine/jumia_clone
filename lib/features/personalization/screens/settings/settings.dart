@@ -12,6 +12,7 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../shop/screens/cart/cart.dart';
 import '../../../shop/screens/order/order.dart';
+import '../../controllers/local_controller.dart';
 import '../address/addresses.dart';
 import '../profile/profile.dart';
 
@@ -20,32 +21,35 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocaleController localeController = Get.find();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             /// header
             TPrimaryHeaderContainer(
-                child: Column(
-              children: [
-                /// appBar
-                TAppBar(
-                  title: Text(
-                    'Account',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .apply(color: TColors.white),
+              child: Column(
+                children: [
+                  /// appBar
+                  TAppBar(
+                    title: Text(
+                      'Account',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .apply(color: TColors.white),
+                    ),
                   ),
-                ),
 
-                /// user profile picture
-                TUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen()),),
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-              ],
-            )),
+                  /// user profile picture
+                  TUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen()),),
+                  const SizedBox(
+                    height: TSizes.spaceBtwSections,
+                  ),
+                ],
+              ),
+            ),
 
             /// list of settings menu (body)
             Padding(
@@ -71,7 +75,30 @@ class SettingsPage extends StatelessWidget {
                   TSettingsMenuTile(icon: Iconsax.document_upload ,title: 'Load data', subtitle: 'Upload data to your cloud firebase', onTab: (){},),
                   TSettingsMenuTile(icon: Iconsax.location ,title: 'Geolocation', subtitle: 'USet recommendation based on location  ', onTab: (){}, trailing: Switch(value: true, onChanged: (value){},),),
                   TSettingsMenuTile(icon: Iconsax.security_user ,title: 'Safe Mode', subtitle: 'Search results are safe for all ages ', onTab: (){}, trailing: Switch(value: false, onChanged: (value){},),),
-                  TSettingsMenuTile(icon: Iconsax.image ,title: 'HD image quality', subtitle: 'Set image quality to be seen ', onTab: (){}, trailing: Switch(value: false, onChanged: (value){},),),
+
+                  /// Language Selection
+                  Obx(() {
+                    return TSettingsMenuTile(
+                      icon: Icons.language,
+                      title: 'Language',
+                      subtitle: 'Select your preferred language',
+                      trailing: DropdownButton<String>(
+                        value: localeController.locale.value.languageCode, // Selected language
+                        items: [
+                          const DropdownMenuItem(value: 'en', child: Text('English')),
+                          const DropdownMenuItem(value: 'fr', child: Text('Français')),
+                          const DropdownMenuItem(value: 'ar', child: Text('العربية')),
+                        ],
+                        onChanged: (value) {
+                          if (value != null) {
+                            localeController.changeLocale(value); // Update locale
+                          }
+                        },
+                      ),
+                      onTab: () {},
+                    );
+                  }),
+
                   /// logout button
                   SizedBox(
                     width: double.infinity,

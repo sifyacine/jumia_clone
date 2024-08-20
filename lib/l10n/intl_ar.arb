@@ -1,0 +1,54 @@
+{
+  "globalTexts": {},
+  "onBoardingTexts": {
+    "onBoardingTitle1": "اختر منتجك",
+    "onBoardingTitle2": "اختر طريقة الدفع",
+    "onBoardingTitle3": "التوصيل إلى باب منزلك",
+    "onBoardingSubTitle1": "مرحبًا بك في عالم من الخيارات اللامحدودة - منتجك المثالي في انتظارك!",
+    "onBoardingSubTitle2": "للمعاملات السلسة، اختر طريق الدفع الخاص بك - راحتك هي أولويتنا!",
+    "onBoardingSubTitle3": "من بابنا إلى بابك - توصيل سريع وآمن وبدون تلامس!"
+  },
+  "homeTexts": {
+    "homeAppbarTitle": "يوم جيد للتسوق",
+    "homeAppbarSubTitle": "سيف ياسين"
+  },
+  "authenticationFormTexts": {
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "newPassword": "كلمة المرور الجديدة",
+    "username": "اسم المستخدم",
+    "phoneNo": "رقم الهاتف",
+    "rememberMe": "تذكرني",
+    "forgetPassword": "نسيت كلمة المرور؟",
+    "signIn": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "orSignInWith": "أو تسجيل الدخول باستخدام",
+    "orSignUpWith": "أو التسجيل باستخدام",
+    "iAgreeTo": "أوافق على",
+    "privacyPolicy": "سياسة الخصوصية",
+    "ternsOfUse": "شروط الاستخدام",
+    "verificationCode": "رمز التحقق",
+    "resendEmail": "إعادة إرسال البريد الإلكتروني",
+    "resendEmailIn": "إعادة إرسال البريد الإلكتروني في",
+    "and": "و"
+  },
+  "authenticationHeadingsTexts": {
+    "loginTitle": "مرحبًا بعودتك",
+    "loginSubTitle": "اكتشف خيارات لا حصر لها وراحة غير مسبوقة",
+    "signupTitle": "لننشئ حسابك",
+    "forgetPasswordTitle": "نسيت كلمة المرور",
+    "forgetPasswordSubTitle": "لا تقلق، أحيانًا ينسى الناس أيضًا، أدخل بريدك الإلكتروني وسنقوم بذلك",
+    "changeYourPasswordTitle": "تم إرسال بريد إعادة تعيين كلمة المرور",
+    "changeYourPasswordSubTitle": "أمان حسابك هو أولويتنا! لقد أرسلنا لك رابطًا آمنًا إلى بريدك الإلكتروني",
+    "confirmEmail": "تحقق من عنوان بريدك الإلكتروني!",
+    "confirmEmailSubTitle": "تهانينا! حسابك في انتظارك: تحقق من بريدك الإلكتروني لبدء التسوق والاستمتاع!!",
+    "emailNotReceivedMessage": "لم تحصل على البريد الإلكتروني؟ تحقق من البريد غير المرغوب فيه/الرسائل غير المرغوب فيها أو أعد إرساله.",
+    "yourAccountCreatedTitle": "تم إنشاء حسابك بنجاح!",
+    "yourAccountCreatedSudTitle": "مرحبًا بك في وجهتك النهائية للتسوق: تم إنشاء حسابك،",
+    "tContinue": "استمر",
+    "tSubmit": "إرسال",
+    "tDone": "تم"
+  }
+}

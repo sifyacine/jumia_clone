@@ -33,11 +33,14 @@ dependencies:
 
   # utility packages
   http: ^1.1.0
-  intl: ^0.18.1
+  intl: ^0.19.0
+  intl_utils: ^2.8.7
   logger: ^2.0.1
   url_launcher: ^6.1.12
   flutter_native_splash: ^2.3.2
   smooth_page_indicator: ^1.1.0
+  flutter_localizations:
+    sdk: flutter
 
   # icons
   iconsax: ^0.0.8
@@ -61,19 +64,11 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-
-
   #  color: "#FFFFFF"
   #  color_dark: "#272727"
   #  image: assets/logos/luna-store-splash-logo-black-removebg-preview.png
   #  image_dark: assets/logos/luna-store-splash-logo-white-removebg-preview.png
-
-
-
-
-
   #-------------------------- ./ packages end --------------------------#
-
 
 dev_dependencies:
   flutter_test:
@@ -88,10 +83,9 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -151,7 +145,6 @@ flutter:
     - assets/icons/payment-methods/paytm.png
     - assets/icons/payment-methods/payment-seccussfully.gif
 
-
   #-------------------------- local fonts --------------------------#
   fonts:
     - family: Poppins
@@ -171,6 +164,5 @@ flutter:
           weight: 600
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 800
-
-
-
+flutter_intl:
+  enabled: true
