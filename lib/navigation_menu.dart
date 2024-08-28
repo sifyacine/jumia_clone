@@ -24,7 +24,7 @@ class NavigationMenu extends StatelessWidget {
       bottomNavigationBar: Obx(
             () =>
             NavigationBar(
-              height: 80,
+              height: 74,
               backgroundColor: isDark ? TColors.dark : TColors.light,
               elevation: 0,
               selectedIndex: controller.selectedIndex.value,

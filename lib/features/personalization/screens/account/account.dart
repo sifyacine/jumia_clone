@@ -42,7 +42,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
     return Scaffold(
       appBar: TAppBar(
-        title: const Text("Account"),
+        title: const Text("Account", style: TextStyle(color: TColors.white)),
         actions: [
           IconButton(
             onPressed: () {},
