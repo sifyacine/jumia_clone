@@ -31,7 +31,12 @@ class TRatingAndShare extends StatelessWidget {
           ],
         ),
         /// share
-        IconButton(onPressed: (){}, icon: const Icon(Icons.share, size: TSizes.icond,))
+        Row(
+          children: [
+            IconButton(onPressed: (){}, icon: const Icon(Icons.share, size: TSizes.icond,)),
+            IconButton(onPressed: (){}, icon: const Icon(Iconsax.heart, size: TSizes.icond,)),
+          ],
+        )
 
 
       ],

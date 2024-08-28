@@ -24,7 +24,7 @@ class AddressesScreen extends StatelessWidget {
         child: const Icon(Iconsax.add, color: TColors.white),
       ),
       appBar: const TAppBar(
-        title: Text('Addresses'),
+        title: Text('Addresses', style: TextStyle(color: Colors.white),),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
