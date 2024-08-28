@@ -50,21 +50,21 @@ class _HelpScreenState extends State<HelpScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                title: Text('English'),
+                title: const Text('English'),
                 onTap: () {
                   _updateLanguage('English');
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('French'),
+                title: const Text('French'),
                 onTap: () {
                   _updateLanguage('French');
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('Arabic'),
+                title: const Text('Arabic'),
                 onTap: () {
                   _updateLanguage('Arabic');
                   Navigator.pop(context);
@@ -89,7 +89,7 @@ class _HelpScreenState extends State<HelpScreen> {
         content: Text('The app version is ${_packageInfo.version}'),
         backgroundColor: Colors.black,
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
 
       ),
     );
@@ -100,8 +100,8 @@ class _HelpScreenState extends State<HelpScreen> {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
-      appBar: TAppBar(
-        title: Text("Help"),
+      appBar: const TAppBar(
+        title: Text("Help", style: TextStyle(color: Colors.white)),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -115,12 +115,12 @@ class _HelpScreenState extends State<HelpScreen> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: TColors.primaryColor,
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.chat, size: 20.0, color: Colors.white),
@@ -129,9 +129,9 @@ class _HelpScreenState extends State<HelpScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 24.0),
-                TSectionHeading(title: 'About Us', textColor: Colors.grey),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 24.0),
+                const TSectionHeading(title: 'About Us', textColor: Colors.grey),
+                const SizedBox(height: 8.0),
                 _buildSectionContainer(
                   children: [
                     TSettingsMenuTile(
@@ -148,9 +148,9 @@ class _HelpScreenState extends State<HelpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 24.0),
-                TSectionHeading(title: 'Settings', textColor: Colors.grey),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 24.0),
+                const TSectionHeading(title: 'Settings', textColor: Colors.grey),
+                const SizedBox(height: 8.0),
                 _buildSectionContainer(
                   children: [
                     TSettingsMenuTile(
