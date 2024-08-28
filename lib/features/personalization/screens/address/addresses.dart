@@ -9,7 +9,6 @@ import "../../../../utils/constants/sizes.dart";
 import "add_new_ddress.dart";
 import "widgets/single_address.dart";
 
-
 class AddressesScreen extends StatelessWidget {
   const AddressesScreen({super.key});
 
@@ -17,23 +16,31 @@ class AddressesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){Get.to(() => const AddNewAddressScreen());},
+        onPressed: () {
+          Get.to(() => const AddNewAddressScreen(isEdit: false));
+        },
         backgroundColor: TColors.primaryColor,
         elevation: 0,
-        child: const Icon(Iconsax.add, color: TColors.white,),
+        child: const Icon(Iconsax.add, color: TColors.white),
       ),
       appBar: const TAppBar(
         title: Text('Addresses'),
         showBackArrow: true,
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TSingleAddress(selectedAddress: true,),
-              TSingleAddress(selectedAddress: false,),
-              TSingleAddress(selectedAddress: false,),
+              TSingleAddress(selectedAddress: true, onEdit: () {
+                Get.to(() => const AddNewAddressScreen(isEdit: true));
+              }),
+              TSingleAddress(selectedAddress: false, onEdit: () {
+                Get.to(() => const AddNewAddressScreen(isEdit: true));
+              }),
+              TSingleAddress(selectedAddress: false, onEdit: () {
+                Get.to(() => const AddNewAddressScreen(isEdit: true));
+              }),
             ],
           ),
         ),

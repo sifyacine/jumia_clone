@@ -1,16 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jumia_clone/features/shop/screens/home/widgets/home_appbar.dart';
-import 'package:jumia_clone/features/shop/screens/home/widgets/home_categories.dart';
-import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
-import '../../../../common/widgets/custom_shapes/containers/search_bar_container.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../../../../common/widgets/appbar/kappbar.dart';
+
 import '../../../../common/widgets/layout/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_cards_vertical.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 import '../all_products/all_products.dart';
 import 'widgets/promo_slider.dart';
 
@@ -19,55 +20,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = THelperFunctions.isDarkMode(context);
     return Scaffold(
+      appBar: const KAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            /// header part
-            const TPrimaryHeaderContainer(
-              child: Column(
-                children: [
-                  /// appBar
-                  THomeAppBar(),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-
-                  /// searchbar
-                  TSearchContainer(
-                    text: 'Search in store',
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
-
-                  /// categories
-                  Padding(
-                    padding: EdgeInsets.only(left: TSizes.defaultSpace),
-                    child: Column(
-                      children: [
-                        /// heading
-                        TSectionHeading(
-                          title: 'Product Categories',
-                          textColor: TColors.white,
-                        ),
-                        SizedBox(
-                          height: TSizes.spaceBtwItems,
-                        ),
-
-                        /// categories
-                        THomeCategories()
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical:4.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: isDark? TColors.dark: Colors.blue[50],
+                ),
+                height: 32,
+                width: double.infinity,
+                child: const Center(
+                  child: Text('order by phone at 0676774374'),
+                ),
               ),
             ),
-
             /// body part
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.symmetric(vertical: TSizes.defaultSpace),
               child: Column(
                 children: [
                   /// promo slider
@@ -76,22 +50,186 @@ class HomeScreen extends StatelessWidget {
                       TImages.promoBanner1,
                       TImages.promoBanner2,
                       TImages.promoBanner3,
+                      TImages.promoBanner3,
+                      TImages.promoBanner2,
+                      TImages.promoBanner1,
                     ],
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-
-                  /// section heading
-                  TSectionHeading(
-                    title: 'Popular products',
-                    onPressed: () {Get.to(() => const AllProducts());},
-                    showActionButton: true,
-                  ),
                   const SizedBox(height: TSizes.spaceBtwItems),
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+                        color: Colors.red,
+                        width: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Row(
+                              children: [
+                                Icon(Iconsax.flash, color: Colors.yellow),
+                                SizedBox(width: 6.0),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Flash Sales: quickly, limited stock", style:TextStyle(color: Colors.white, fontSize: 12),),
+                                    Row(
+                                      children: [
+                                        Text("Time left: ", style:TextStyle(color: Colors.white, fontSize: 12),),
+                                        Text(" 00h : 12min : 32 s",style:TextStyle(color: Colors.white, fontSize: 12),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            TextButton(onPressed: () {  }, child: const Text("View all", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold), ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      // Horizontal product cards
+                      SizedBox(
+                        height: 220, // Adjust height as needed for your design
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder: (_, index) => const SizedBox(
+                            width: 160, // Adjust width for each card
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TProductCardsVertical(),
+                            ),
+                          ),
+                        ),
+                      ),
 
-                  /// -- popular products
-                  TGridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const TProductCardsVertical(),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace, vertical: 8,),
+                          color: const Color(0xFF800a00),
+                          width: double.infinity,
+                        child: const Center(
+                          child: Text("MEGA FLASH SALES", style: TextStyle(color: Colors.white, fontSize: 12.0),),
+                        )
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      SizedBox(
+                        height: 220, // Adjust height as needed for your design
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (_, index) => const SizedBox(
+                            width: 160, // Adjust width for each card
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TProductCardsVertical(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace, vertical: 8,),
+                          color: const Color(0xFF800a00),
+                          width: double.infinity,
+                        child: const Center(
+                          child: Text("OFFERS NOT TO BE MISSED", style: TextStyle(color: Colors.white, fontSize: 12.0),),
+                        )
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      SizedBox(
+                        height: 220, // Adjust height as needed for your design
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (_, index) => const SizedBox(
+                            width: 160, // Adjust width for each card
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TProductCardsVertical(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /// section heading
+                              TSectionHeading(
+                                title: 'Recently seen',
+                                onPressed: () {Get.to(() => const AllProducts());},
+                                showActionButton: true,
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+
+                              /// -- most requested
+                              TGridLayout(
+                                itemCount: 4,
+                                itemBuilder: (_, index) => const TProductCardsVertical(),
+                              ),
+                            ]
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /// section heading
+                              TSectionHeading(
+                                title: 'everything at minus 50%',
+                                onPressed: () {Get.to(() => const AllProducts());},
+                                showActionButton: true,
+                              ),
+                              const SizedBox(height: TSizes.spaceBtwItems),
+
+                              SizedBox(
+                                height: 220, // Adjust height as needed for your design
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 3,
+                                  itemBuilder: (_, index) => const SizedBox(
+                                    width: 160, // Adjust width for each card
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: TProductCardsVertical(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            /// section heading
+                            TSectionHeading(
+                              title: 'Most requested',
+                              onPressed: () {Get.to(() => const AllProducts());},
+                              showActionButton: true,
+                            ),
+                            const SizedBox(height: TSizes.spaceBtwItems),
+
+                            /// -- most requested
+                            TGridLayout(
+                              itemCount: 4,
+                              itemBuilder: (_, index) => const TProductCardsVertical(),
+                            ),
+                          ]
+                        ),
+                      ),
+                    ]
                   ),
                 ],
               ),

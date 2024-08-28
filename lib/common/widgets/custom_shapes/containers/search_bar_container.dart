@@ -3,17 +3,17 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../../../../utils/device/device_utility.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 
 class TSearchContainer extends StatelessWidget {
   const TSearchContainer({
-    super.key,
-    required this.text,
-    this.icon,
-    this.showBackground = true,
-    this.showBorder = true, this.onTap,
-    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+  super.key,
+  required this.text,
+  this.icon,
+  this.showBackground = true,
+  this.showBorder = true,
+  this.onTap,
+  this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
   });
 
   final String text;
@@ -30,15 +30,16 @@ class TSearchContainer extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Container(
-          width: TDeviceUtils.getScreenWidth(context),
-          padding: const EdgeInsets.all(TSizes.md),
+          // Adjust the width to fit within the app bar
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: TSizes.sm, vertical: TSizes.xs),
           decoration: BoxDecoration(
             color: showBackground
                 ? isDark
-                    ? TColors.dark
-                    : TColors.light
+                ? TColors.dark
+                : TColors.light
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(TSizes.cardRadiuslg),
+            borderRadius: BorderRadius.circular(12),
             border: showBorder ? Border.all(color: TColors.kGrey) : null,
           ),
           child: Row(
@@ -48,7 +49,7 @@ class TSearchContainer extends StatelessWidget {
                 color: TColors.kDarkGrey,
               ),
               const SizedBox(
-                width: TSizes.spaceBtwItems,
+                width: TSizes.sm,
               ),
               Text(
                 text,

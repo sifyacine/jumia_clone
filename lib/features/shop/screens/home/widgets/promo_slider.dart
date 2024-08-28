@@ -10,7 +10,7 @@ import '../../../controllers/home_controller.dart';
 
 class TPromoSlider extends StatelessWidget {
   const TPromoSlider({
-    super.key, required this.banners,
+  super.key, required this.banners,
   });
 
   final List<String> banners;
@@ -23,6 +23,8 @@ class TPromoSlider extends StatelessWidget {
         CarouselSlider(
           options: CarouselOptions(
             viewportFraction: 1,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 5),
             onPageChanged: (index, _) => controller.updatePageIndecator(index),
           ),
           items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
@@ -31,10 +33,10 @@ class TPromoSlider extends StatelessWidget {
           height: TSizes.spaceBtwItems,
         ),
         Obx(
-          () => Row(
+              () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < 3; i++)
+              for (int i = 0; i < banners.length; i++) // Change 3 to banners.length
                 TCircularContainer(
                   margin: const EdgeInsets.only(right: 10),
                   width: 20,

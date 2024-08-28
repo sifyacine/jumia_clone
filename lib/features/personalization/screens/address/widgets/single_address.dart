@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -8,12 +7,14 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 
 class TSingleAddress extends StatelessWidget {
+  final bool selectedAddress;
+  final VoidCallback onEdit;
+
   const TSingleAddress({
     Key? key,
     required this.selectedAddress,
+    required this.onEdit,
   }) : super(key: key);
-
-  final bool selectedAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class TSingleAddress extends StatelessWidget {
       borderColor: selectedAddress
           ? Colors.transparent
           : isDark
-              ? TColors.kGrey
-              : TColors.kGrey,
+          ? TColors.kGrey
+          : TColors.kGrey,
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       child: Stack(
         children: [
@@ -39,9 +40,24 @@ class TSingleAddress extends StatelessWidget {
               selectedAddress ? Iconsax.tick_circle5 : null,
               color: selectedAddress
                   ? isDark
-                      ? TColors.light
-                      : TColors.dark
+                  ? TColors.light
+                  : TColors.dark
                   : null,
+            ),
+          ),
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: IconButton(
+              onPressed: onEdit,
+              icon: Icon(
+                Icons.edit,
+                color: selectedAddress
+                    ? isDark
+                    ? TColors.light
+                    : TColors.dark
+                    : null,
+              ),
             ),
           ),
           Padding(
@@ -56,18 +72,18 @@ class TSingleAddress extends StatelessWidget {
                 ),
                 const SizedBox(height: TSizes.sm / 2),
                 const Text(
-                  '(+213) 676774374',
+                  '0676774374',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: TSizes.sm / 2),
                 const Text(
-                  '82356 timmy coves, south lina, maine, 87665, usa',
+                  'ain-Defla, Djelida',
                   softWrap: true,
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

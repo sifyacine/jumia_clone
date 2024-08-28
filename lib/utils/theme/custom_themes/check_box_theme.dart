@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+
 class TCheckBoxTheme{
   TCheckBoxTheme._();
 
@@ -15,7 +17,7 @@ class TCheckBoxTheme{
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if(states.contains(WidgetState.selected)){
-        return Colors.blue;
+        return TColors.primaryColor;
       }else{
         return Colors.transparent;
       }
@@ -33,7 +35,7 @@ class TCheckBoxTheme{
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if(states.contains(WidgetState.selected)){
-        return Colors.blue;
+        return TColors.primaryColor;
       }else{
         return Colors.transparent;
       }

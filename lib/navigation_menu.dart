@@ -1,18 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jumia_clone/utils/constants/colors.dart';
 import 'package:jumia_clone/utils/helpers/helper_functions.dart';
 
-import 'features/personalization/screens/settings/settings.dart';
+import 'features/personalization/screens/account/account.dart';
+import 'features/personalization/screens/help/help_screen.dart';
+import 'features/shop/screens/feed/feed_page.dart';
 import 'features/shop/screens/home/home.dart';
 import 'features/shop/screens/store/store.dart';
-import 'features/shop/screens/wishlist/wishlist.dart';
 
 
 class NavigationMenu extends StatelessWidget {
-  const NavigationMenu({super.key});
+  const NavigationMenu
+
+  ({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +22,27 @@ class NavigationMenu extends StatelessWidget {
     final controller = Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
-        () => NavigationBar(
-          height: 80,
-          backgroundColor: isDark ? TColors.dark : TColors.light,
-          elevation: 0,
-          selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) => controller.selectedIndex.value = index,
-          destinations: const [
-            NavigationDestination(icon: Icon(Iconsax.home), label: 'home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'store'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: 'wishlist'),
-            NavigationDestination(icon: Icon(Iconsax.user), label: 'profile'),
-          ],
-        ),
+            () =>
+            NavigationBar(
+              height: 80,
+              backgroundColor: isDark ? TColors.dark : TColors.light,
+              elevation: 0,
+              selectedIndex: controller.selectedIndex.value,
+              onDestinationSelected: (index) =>
+              controller.selectedIndex.value = index,
+              destinations: const [
+                NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
+                NavigationDestination(icon: Icon(Iconsax.shop), label: 'Categories'),
+                NavigationDestination(
+                    icon: Icon(Iconsax.chart), label: 'Feed'),
+                NavigationDestination(
+                    icon: Icon(Iconsax.user), label: 'Account'),
+                NavigationDestination(
+                    icon: Icon(Icons.help_outlined), label: 'help'),
+              ],
+            ),
       ),
-      body: Obx(() =>  controller.screens[controller.selectedIndex.value]),
+      body: Obx(() => controller.screens[controller.selectedIndex.value]),
     );
   }
 }
@@ -42,7 +50,13 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [const HomeScreen(), const StorePage(), const WishlistPage(), const SettingsPage()];
+  final screens = [
+    const HomeScreen(),
+    const StorePage(),
+    const FeedPage(),
+    const AccountScreen(),
+    const HelpScreen(),
+  ];
 
 }
 

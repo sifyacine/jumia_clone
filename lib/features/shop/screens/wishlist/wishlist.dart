@@ -1,14 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
-import '../../../../common/widgets/icon/circular_icon.dart';
 import '../../../../common/widgets/layout/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_cards_vertical.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../home/home.dart';
 
 class WishlistPage extends StatelessWidget {
   const WishlistPage({Key? key}) : super(key: key);
@@ -17,10 +13,9 @@ class WishlistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium,),
-        actions: [
-          TCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen()),)
-        ],
+        showBackArrow: true,
+        title: Text("Wishlist", style: TextStyle(color: Colors.white),),
+
       ),
 
       body: SingleChildScrollView(
