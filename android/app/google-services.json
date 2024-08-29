@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "159041878467",
+    "project_id": "hta-eb132",
+    "storage_bucket": "hta-eb132.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159041878467:android:2ecf4d1f868c6b0fc86576",
+        "android_client_info": {
+          "package_name": "com.example.HTA"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159041878467-d8ta9bnno64st9j6prb11nep6gecd4lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.HTA",
+            "certificate_hash": "db3a56b08f6185508407c2132f5e9ad768f10ddc"
+          }
+        },
+        {
+          "client_id": "159041878467-29k3g6v4rh0e2hc6e8gg51ei9qjb7rm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEs4PfgHdzA9ljT3sPN_E5KgrqMOq8Ms4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159041878467-29k3g6v4rh0e2hc6e8gg51ei9qjb7rm0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "159041878467-en498da8of78da5jf961k95ejab77ees.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jumiaClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
