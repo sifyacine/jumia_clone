@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumia_clone/utils/constants/colors.dart';
 import 'package:jumia_clone/utils/theme/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/authentication/screens/onboarding/onboarding_screen.dart';
@@ -24,7 +25,22 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
-      home: const OnBoardingScreen(),
+      home: const LoaderPage(),
     ));
   }
 }
+
+class LoaderPage  extends StatelessWidget {
+  const LoaderPage ({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: TColors.primaryColor,
+      body: Center(
+        child: CircularProgressIndicator(color: Colors.white)
+      ),
+    );
+  }
+}
+
