@@ -11,6 +11,7 @@ class CustomCard extends StatelessWidget {
   final IconData? optionalIcon;
   final String? optionalText;
   final bool isBlueContainer;
+  final void Function()? onTap;
 
   const CustomCard({
     Key? key,
@@ -20,7 +21,7 @@ class CustomCard extends StatelessWidget {
     required this.footerText,
     this.optionalIcon,
     this.optionalText,
-    this.isBlueContainer = true,
+    this.isBlueContainer = true, this.onTap,
   }) : super(key: key);
 
   @override
@@ -37,23 +38,23 @@ class CustomCard extends StatelessWidget {
           children: [
             // First item: Container with text, blue or red
             Container(
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               color: isBlueContainer ? Colors.blue : Colors.red,
               child: Text(
                 labelText,
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                style: const TextStyle(color: Colors.white, fontSize: 10),
               ),
             ),
 
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             // Second item: Main text
             Text(
               mainText,
-              style: TextStyle(fontSize: 14,),
+              style: const TextStyle(fontSize: 14,),
             ),
 
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Third item: Row of three images without spacing
             Row(
@@ -62,13 +63,11 @@ class CustomCard extends StatelessWidget {
                 // Display only up to 3 images
                 for (int i = 0; i < (imageUrls.length > 3 ? 3 : imageUrls.length); i++)
                   GestureDetector(
-                    onTap: () {
-                      // Implement your onTap functionality here
-                    },
+                    onTap: onTap,
                     child: Stack(
                       children: [
                         Container(
-                          margin: EdgeInsets.all(2.0),
+                          margin: const EdgeInsets.all(2.0),
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
@@ -83,10 +82,10 @@ class CustomCard extends StatelessWidget {
                           Container(
                             width: 100,
                             height: 100,
-                            margin: EdgeInsets.all(2.0),
+                            margin: const EdgeInsets.all(2.0),
                             alignment: Alignment.center,
                             color: Colors.grey.withOpacity(0.6),
-                            child: Text(
+                            child: const Text(
                               'View All',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -97,7 +96,7 @@ class CustomCard extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Fourth item: Footer row
             Row(
@@ -105,16 +104,16 @@ class CustomCard extends StatelessWidget {
               children: [
                 Text(
                   footerText,
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
                 if (optionalIcon != null && optionalText != null)
                   Row(
                     children: [
                       Icon(optionalIcon, color: Colors.grey),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         optionalText!,
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                        style: const TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                     ],
                   ),

@@ -11,7 +11,7 @@ class AllProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: TAppBar(
-        title: Text('Popuare products'),
+        title: Text('All products', style: TextStyle(color: Colors.white),),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(

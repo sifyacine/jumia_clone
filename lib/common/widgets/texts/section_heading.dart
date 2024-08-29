@@ -8,12 +8,14 @@ class TSectionHeading extends StatelessWidget {
   this.buttonTitle = 'view all',
   this.showActionButton = false,
   this.textColor,
+  this.buttonTextColor,
   this.onPressed,
   });
 
   final String title, buttonTitle;
   final bool showActionButton;
   final Color? textColor;
+  final Color? buttonTextColor;
   final void Function()? onPressed;
 
   @override
@@ -27,7 +29,7 @@ class TSectionHeading extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        if(showActionButton) TextButton(onPressed: onPressed, child: Text(buttonTitle)),
+        if(showActionButton) TextButton(onPressed: onPressed, child: Text(buttonTitle, style: TextStyle(color: buttonTextColor),)),
       ],
     );
   }
