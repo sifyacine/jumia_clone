@@ -39,9 +39,13 @@ dependencies:
   carousel_slider: ^4.2.1
   readmore: ^2.2.0
   flutter_rating_bar: ^4.0.1
+  lottie: ^3.1.2
+  connectivity_plus: ^6.0.5
 
   # Firebase
   firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.14.0
 
 flutter_native_splash:
   color: "#FFFFFF"
@@ -72,6 +76,7 @@ flutter:
     - assets/logos/
     - assets/images/onboarding_images/
     - assets/images/animations/
+    - assets/images/animations/Processing-bro.svg
     - assets/logos/
     - assets/icons/categories/
     - assets/images/banners/

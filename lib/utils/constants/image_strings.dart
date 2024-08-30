@@ -94,5 +94,7 @@ class TImages {
   static const String payTm = "assets/icons/payment-methods/paytm.png";
   static const String successfullyPaymentIcon = "assets/icons/payment-methods/payment-seccussfully.gif";
 
+  static const String doceranimation = "assets/images/animations/Processing-bro.svg";
+
 
 }
