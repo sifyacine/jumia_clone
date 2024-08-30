@@ -5,7 +5,6 @@ import '../../../../../common/widgets/chips/choice_chip.dart';
 
 import '../../../../../common/widgets/texts/section_heading.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/helpers/helper_functions.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({Key? key}) : super(key: key);

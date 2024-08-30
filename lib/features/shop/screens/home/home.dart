@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/appbar/kappbar.dart';
-
-import '../../../../common/widgets/layout/grid_layout.dart';
-import '../../../../common/widgets/products/product_cards/product_cards_vertical.dart';
 import '../../../../common/widgets/products/product_cards/simple_product_card.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';

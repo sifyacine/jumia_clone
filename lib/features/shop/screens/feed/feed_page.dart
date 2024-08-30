@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+
 import 'package:jumia_clone/features/shop/screens/feed/widgets/exploring_tab.dart';
 import 'package:jumia_clone/features/shop/screens/feed/widgets/following_tab.dart';
 import '../../../../common/widgets/products/cart/cart_menu_icon.dart';

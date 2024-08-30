@@ -6,7 +6,6 @@ import 'package:jumia_clone/features/shop/screens/product_details/widgets/locati
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/products_attributes.dart';
-import 'package:jumia_clone/features/shop/screens/product_details/widgets/rating_share_widget.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../common/widgets/texts/section_heading.dart';

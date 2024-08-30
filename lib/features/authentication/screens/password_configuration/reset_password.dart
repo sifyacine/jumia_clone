@@ -57,7 +57,7 @@ class ResetPassword extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: (){},
                   child: const Text(
-                    TTexts.tDone,
+                    TTexts.done,
                   ),
                 ),
               ),

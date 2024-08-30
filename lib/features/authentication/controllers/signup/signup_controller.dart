@@ -30,28 +30,42 @@ class SignupController extends GetxController {
       // Start loading
       TFullScreenLoader.openLoadingDialog(
         'We are processing your information...',
-        TImages.doceranimation,
+        TImages.verifyIllustration,
       );
 
       // Check the internet connection asynchronously
       final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) return;
-
-      // Validate the signup form
-      if (!signupFormKey.currentState!.validate()) return;
-      // privacy policy check
-      if (!privacyPolicy.value) {
-        TLoaders.warningSnackBar(
-            title: "Accept Privacy Policy",
-            message:
-                "In order to create an account, you must have to read and accept privacy policy and terms of use");
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        TLoaders.errorSnackBar(
+          title: "No Internet Connection",
+          message: "Please check your internet connection and try again.",
+        );
         return;
       }
-      // register
-      final userCredential = await AuthenticationRepository.instance.registerWithEmailAndPassword(
-          email.text.trim(), password.text.trim());
 
-      // save user data in fire store
+      // Validate the signup form
+      if (!signupFormKey.currentState!.validate()) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Privacy policy check
+      if (!privacyPolicy.value) {
+        TFullScreenLoader.stopLoading();
+        TLoaders.warningSnackBar(
+          title: "Accept Privacy Policy",
+          message:
+          "In order to create an account, you must read and accept the privacy policy and terms of use.",
+        );
+        return;
+      }
+
+      // Register
+      final userCredential = await AuthenticationRepository.instance
+          .registerWithEmailAndPassword(email.text.trim(), password.text.trim());
+
+      // Save user data in Firestore
       final newUser = UserModel(
         id: userCredential.user!.uid,
         firstName: firstName.text.trim(),
@@ -63,16 +77,25 @@ class SignupController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-      // show success message
-      TLoaders.successSnackBar(title: "Congratulations", message: "your account has been created! verify email to continue");
-      Get.to(() => const VerifyEmailScreen());
+      // Stop the loader before navigating
+      TFullScreenLoader.stopLoading();
+
+      // Show success message
+      TLoaders.successSnackBar(
+        title: "Congratulations",
+        message: "Your account has been created! Verify email to continue.",
+      );
+
+      // Navigate to the Verify Email screen
+      Get.off(() => VerifyEmailScreen(email: email.text.trim()));
     } catch (e) {
+      TFullScreenLoader.stopLoading();
+
       TLoaders.errorSnackBar(
         title: "Oh snap!",
         message: e.toString(),
       );
-    } finally {
-      TFullScreenLoader.stopLoading();
     }
   }
+
 }

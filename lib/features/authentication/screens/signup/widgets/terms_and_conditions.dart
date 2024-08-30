@@ -51,7 +51,7 @@ class TermsAndConditions extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 TextSpan(
-                  text: '${TTexts.ternsOfUse} ',
+                  text: '${TTexts.termsOfUse} ',
                   style: Theme.of(context).textTheme.bodyMedium!.apply(
                         color: isDark ? TColors.white : TColors.primaryColor,
                         decoration: TextDecoration.underline,

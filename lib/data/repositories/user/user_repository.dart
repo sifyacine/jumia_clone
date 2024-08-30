@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../features/authentication/models/user_model.dart';
-import '../../../utils/exceptions/exceptions.dart';
+import '../../../utils/exceptions/firebase_auth_exceptions.dart';
+import '../../../utils/exceptions/firebase_exceptions.dart';
+import '../../../utils/exceptions/format_exceptions.dart';
+import '../../../utils/exceptions/platform_exceptions.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -15,14 +18,13 @@ class UserRepository extends GetxController {
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
-      // Assuming TFirebaseException constructor accepts a message string
-      throw TFirebaseException(e.message ?? "A Firebase error occurred");
-    } on FormatException catch (e) {
-      // Assuming TFormatException constructor accepts a message string
-      throw TFormatException(e.message);
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
     } on PlatformException catch (e) {
-      // Assuming TPlatformException constructor accepts a message string
       throw TPlatformException(e.code).message;
     } catch (e) {
       throw Exception("Something went wrong, please try again");

@@ -6,7 +6,6 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../../../utils/validators/validation.dart';
 import '../../../controllers/signup/signup_controller.dart';
-import '../verify_email.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({

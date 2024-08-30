@@ -93,7 +93,7 @@ class TProductMetaData extends StatelessWidget {
     return Row(
       children: [
         TCircularImage(
-          image: TImages.nikeIcon,
+          image: TImages.applePay,
           width: 32,
           height: 32,
           backgroundColor: isDark ? TColors.kGrey : TColors.white,
