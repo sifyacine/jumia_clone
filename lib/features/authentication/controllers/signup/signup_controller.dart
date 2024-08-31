@@ -30,7 +30,7 @@ class SignupController extends GetxController {
       // Start loading
       TFullScreenLoader.openLoadingDialog(
         'We are processing your information...',
-        TImages.verifyIllustration,
+        "assets/images/animations/141397-loading-juggle.json",
       );
 
       // Check the internet connection asynchronously
