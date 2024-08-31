@@ -21,7 +21,7 @@ class TSocialButtons extends StatelessWidget {
         Container(
           decoration: BoxDecoration(border: Border.all(color: TColors.kGrey), borderRadius: BorderRadius.circular(100)),
           child: IconButton(
-            onPressed: () => controller.signInWithGoogle(),
+            onPressed: () => controller.googleSignIn(),
             icon: const Image(
               width: TSizes.icond,
               height: TSizes.icond,

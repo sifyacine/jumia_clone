@@ -9,8 +9,7 @@ import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/helpers/helper_functions.dart';
-import '../../../authentication/controllers/signup/signup_controller.dart';
-import '../../../authentication/screens/login/login_screen.dart';
+
 import '../../../shop/screens/order/order.dart';
 import '../../../shop/screens/wishlist/wishlist.dart';
 import '../address/addresses.dart';
@@ -116,11 +115,41 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  controller.logout();
-                  Get.offAll(const LoginScreen());
+                  // Show confirmation dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Confirm Logout"),
+                        content: const Text("Are you sure you want to log out?"),
+                        actions: [
+                          TextButton(
+                            child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
+                            onPressed: () {
+                              // Close the dialog without logging out
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: const Text("Logout", style: TextStyle(color: TColors.primaryColor)),
+                            onPressed: () {
+                              // Call the logout method from your controller
+                              controller.logout();
+                              // Close the dialog
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
-                child: const Text("log out", style: TextStyle(fontSize: 18.0, color: TColors.primaryColor)),
+                child: const Text(
+                  "log out",
+                  style: TextStyle(fontSize: 18.0, color: TColors.primaryColor),
+                ),
               ),
+
             ],
 
           ),

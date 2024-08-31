@@ -1,17 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:jumia_clone/features/authentication/screens/password_configuration/reset_password.dart';
 
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
+import '../../../../utils/validators/validation.dart';
+import '../../controllers/forget_password/forget_password_controller.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the ForgetPasswordController
+    final controller = Get.put(ForgetPasswordController());
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -20,15 +23,13 @@ class ForgetPassword extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// headings
+              /// Headings
               Text(
                 TTexts.forgetPasswordTitle,
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: TSizes.spaceBtwItems,
-              ),
+              const SizedBox(height: TSizes.spaceBtwItems),
               Text(
                 TTexts.forgetPasswordSubTitle,
                 style: Theme.of(context).textTheme.labelMedium,
@@ -36,22 +37,28 @@ class ForgetPassword extends StatelessWidget {
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              /// text field
-              TextFormField(
-                decoration: const InputDecoration(
+              /// Text Field
+              Form(
+                key: controller.forgetPasswordFormKey,
+                child: TextFormField(
+                  controller: controller.email,
+                  validator: TValidator.validateEmail,
+                  decoration: const InputDecoration(
                     labelText: TTexts.email,
-                    prefixIcon: Icon(Iconsax.direct_right)),
+                    prefixIcon: Icon(Iconsax.direct_right),
+                  ),
+                ),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              /// submit button
+              /// Submit Button
               SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => const ResetPassword());
-                      },
-                      child: const Text(TTexts.submit))),
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: controller.sendPasswordResetEmail, // Correct method invocation
+                  child: const Text(TTexts.submit),
+                ),
+              ),
             ],
           ),
         ),

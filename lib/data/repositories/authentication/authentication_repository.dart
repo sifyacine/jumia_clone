@@ -89,9 +89,10 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [ReAutenticate] ReAuthenticatee user
+  /// [EmailVerification] - mail verification
   Future<void> sendEmailVerification() async {
     try {
-      return await _auth.currentUser?.sendEmailVerification();
+      await _auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -105,9 +106,24 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  /// [EmailVerification] - mail verification
 
   /// [EmailAuthnentication] - forgetpassword
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw Exception("Something went wrong, please try again");
+    }
+  }
 
 /*------------------------------ social sign in ------------------------------*/
 
@@ -142,7 +158,9 @@ class AuthenticationRepository extends GetxController {
   /// logout user
   Future<void> logout() async {
     try {
+      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
