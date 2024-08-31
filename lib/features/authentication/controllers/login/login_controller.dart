@@ -6,6 +6,7 @@ import '../../../../data/repositories/authentication/authentication_repository.d
 import '../../../../utils/loaders/loaders.dart';
 import '../../../../utils/network/network_manager.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
+import '../../../personalization/controllers/user_controller.dart';
 
 class LoginController extends GetxController {
   /// variables
@@ -15,6 +16,8 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
+
 
 
   @override
@@ -61,8 +64,24 @@ class LoginController extends GetxController {
   Future<void> googleSignIn() async {
     try {
       TFullScreenLoader.openLoadingDialog("logging you in...", "assets/images/animations/loader-animation.json");
+      // check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+      // google authentication
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      // save user records
+      await userController.saveUserRecord(userCredentials);
+      TFullScreenLoader.stopLoading();
+
+      AuthenticationRepository.instance.screenRedirect();
+
 
     }catch(e){
+      TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: "oh snap", message: e.toString());
     }
   }

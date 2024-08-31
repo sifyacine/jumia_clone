@@ -81,4 +81,14 @@ class UserModel {
   String toString() {
     return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, username: $username, email: $email, phoneNumber: $phoneNumber}';
   }
+
+  static generateUserName(String fullName) {
+    List<String> namePorts = fullName.split(" ");
+    String firstName = namePorts[0].toLowerCase();
+    String lastName = namePorts.length>1 ? namePorts[1].toLowerCase() : "";
+
+    String camelCaseUserName = "$firstName$lastName";
+    String usernameWithPrefix = "cwt_$camelCaseUserName";
+    return usernameWithPrefix;
+  }
 }
