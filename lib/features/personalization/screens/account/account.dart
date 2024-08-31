@@ -6,8 +6,11 @@ import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
 import '../../../../common/widgets/products/cart/cart_menu_icon.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/helpers/helper_functions.dart';
+import '../../../authentication/controllers/signup/signup_controller.dart';
+import '../../../authentication/screens/login/login_screen.dart';
 import '../../../shop/screens/order/order.dart';
 import '../../../shop/screens/wishlist/wishlist.dart';
 import '../address/addresses.dart';
@@ -39,6 +42,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
     final titleColor = isDark ? Colors.white : Colors.black;
+    final controller = Get.put(AuthenticationRepository());
 
     return Scaffold(
       appBar: TAppBar(
@@ -111,8 +115,11 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
               TextButton(
-                onPressed: (){},
-                child: Text("log out", style: TextStyle(fontSize: 18.0, color: TColors.primaryColor)),
+                onPressed: () {
+                  controller.logout();
+                  Get.offAll(const LoginScreen());
+                },
+                child: const Text("log out", style: TextStyle(fontSize: 18.0, color: TColors.primaryColor)),
               ),
             ],
 
