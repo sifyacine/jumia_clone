@@ -60,29 +60,35 @@ class LoginController extends GetxController {
     }
   }
 
-  /// google sign in
+  /// Google sign-in
   Future<void> googleSignIn() async {
     try {
-      TFullScreenLoader.openLoadingDialog("logging you in...", "assets/images/animations/loader-animation.json");
-      // check internet connectivity
+      // Show loading dialog
+      TFullScreenLoader.openLoadingDialog("Logging you in...", "assets/images/animations/loader-animation.json");
+
+      // Check internet connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         TFullScreenLoader.stopLoading();
+        TLoaders.errorSnackBar(title: "No Internet", message: "Please check your internet connection and try again.");
         return;
       }
-      // google authentication
-      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
 
-      // save user records
-      await userController.saveUserRecord(userCredentials);
+      // Google authentication
+      final googleUserCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      // Save user records
+      await userController.saveUserRecord(googleUserCredentials);
+
+      // Stop loading and redirect
       TFullScreenLoader.stopLoading();
-
       AuthenticationRepository.instance.screenRedirect();
 
-
-    }catch(e){
+    } catch (e) {
+      // Stop loading and show error
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: "oh snap", message: e.toString());
+      TLoaders.errorSnackBar(title: "Oh snap", message: "An error occurred: ${e.toString()}");
     }
   }
+
 }
