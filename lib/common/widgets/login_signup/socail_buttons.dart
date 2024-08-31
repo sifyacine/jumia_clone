@@ -6,10 +6,9 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 
-
 class TSocialButtons extends StatelessWidget {
   const TSocialButtons({
-  super.key,
+    super.key,
   });
 
   @override
@@ -19,9 +18,15 @@ class TSocialButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          decoration: BoxDecoration(border: Border.all(color: TColors.kGrey), borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(
+              border: Border.all(color: TColors.kGrey),
+              borderRadius: BorderRadius.circular(100)),
           child: IconButton(
+<<<<<<< HEAD
+            onPressed: () {} /*controller.signInWithGoogle()*/,
+=======
             onPressed: () => controller.googleSignIn(),
+>>>>>>> d7ef2d57314895c948f7ba0ae3a99832f67943c2
             icon: const Image(
               width: TSizes.icond,
               height: TSizes.icond,
@@ -31,13 +36,15 @@ class TSocialButtons extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: TSizes.spaceBtwItems,),
+        const SizedBox(
+          width: TSizes.spaceBtwItems,
+        ),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: TColors.kGrey), borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(
+              border: Border.all(color: TColors.kGrey),
+              borderRadius: BorderRadius.circular(100)),
           child: IconButton(
-            onPressed: (){
-
-            },
+            onPressed: () {},
             icon: const Image(
               width: TSizes.icond,
               height: TSizes.icond,
