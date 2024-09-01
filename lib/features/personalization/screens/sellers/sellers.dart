@@ -51,13 +51,14 @@ class SellersList extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const HomeScreen(),);
+                    Get.to(
+                      () => HomeScreen(),
+                    );
                   },
                   child: Text(
                     'Continue Shopping',
                     style: TextStyle(fontSize: 16),
                   ),
-
                 ),
               ),
             ],

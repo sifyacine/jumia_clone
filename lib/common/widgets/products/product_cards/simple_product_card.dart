@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 
 import '../../../../features/shop/screens/product_details/product_details.dart';
 import '../../../../utils/constants/colors.dart';
@@ -11,14 +12,20 @@ import '../../texts/product_title_text.dart';
 import '../../texts/produt_price_text.dart';
 
 class TSimpleProductCards extends StatelessWidget {
-  const TSimpleProductCards({Key? key}) : super(key: key);
+  final Product product; // Add a Product instance
+
+  const TSimpleProductCards({
+    Key? key,
+    required this.product, // Make sure it's required
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetails()),
+      onTap: () => Get.to(() => ProductDetails(
+          product: product)), // Pass the product to the ProductDetails screen
       child: Container(
         width: 80,
         decoration: BoxDecoration(
@@ -33,11 +40,15 @@ class TSimpleProductCards extends StatelessWidget {
               backgroundColor: isDark ? TColors.dark : TColors.light,
               child: Stack(
                 children: [
-                  // Replace TRoundedImage with Image.asset or Image.network
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-                    child: Image.asset(
-                      TImages.productImage19,
+                    borderRadius:
+                        BorderRadius.circular(TSizes.productImageRadius),
+                    child: Image.network(
+                      // Updated to use network image
+                      product.images.isNotEmpty
+                          ? product.images[0]
+                          : TImages
+                              .productImage19, // Use the first image if available
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
@@ -51,7 +62,7 @@ class TSimpleProductCards extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: TSizes.xs, horizontal: TSizes.sm),
                       child: Text(
-                        '-25%',
+                        '-${product.discount}%', // Use the product's discount
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -62,18 +73,21 @@ class TSimpleProductCards extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 8.0),
-            const Padding(
-              padding: EdgeInsets.only(left: TSizes.sm),
+            const SizedBox(height: 8.0),
+            Padding(
+              padding: const EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TProductTitleText(
-                    title: 'Blue Nike Air Jordan 4 Shoe',
+                    title: product.name,
                     smallSize: true,
                   ),
-                  SizedBox(height: TSizes.spaceBtwItems / 2),
-                  TProductPricwText(price: '630',)
+                  const SizedBox(height: TSizes.spaceBtwItems / 2),
+                  TProductPricwText(
+                    price:
+                        '${product.price - (product.price * (product.discount / 100))}',
+                  ) // Calculate and display discounted price
                 ],
               ),
             ),

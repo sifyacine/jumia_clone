@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 
 import '../../../../features/shop/screens/product_details/product_details.dart';
 import '../../../../utils/constants/colors.dart';
@@ -23,7 +23,21 @@ class TProductCardsVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetails()),
+      onTap: () => Get.to(() => ProductDetails(
+            product: Product(
+                productID: '',
+                name: 'name',
+                description: 'description',
+                cover: 'cover',
+                category: 'category',
+                price: 2.6,
+                discount: 25.2,
+                stock: 5,
+                images: ['', ''],
+                rating: 12,
+                reviews: [],
+                createdAt: DateTime.now()),
+          )),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -90,7 +104,6 @@ class TProductCardsVertical extends StatelessWidget {
                     height: TSizes.spaceBtwItems / 2,
                   ),
                   TBrandTitleWithVerifiedIcon(title: "Nike"),
-
                 ],
               ),
             ),
@@ -101,15 +114,16 @@ class TProductCardsVertical extends StatelessWidget {
                 /// price
                 const Padding(
                   padding: EdgeInsets.only(left: TSizes.sm),
-                  child: TProductPricwText(price: '35.5',),
+                  child: TProductPricwText(
+                    price: '35.5',
+                  ),
                 ),
                 Container(
                   decoration: const BoxDecoration(
                     color: TColors.dark,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(TSizes.cardRadiusd),
-                      bottomRight:
-                      Radius.circular(TSizes.productImageRadius),
+                      bottomRight: Radius.circular(TSizes.productImageRadius),
                     ),
                   ),
                   child: const SizedBox(

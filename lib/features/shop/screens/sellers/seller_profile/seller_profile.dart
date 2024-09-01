@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:jumia_clone/features/shop/screens/sellers/seller_profile/widgets/product_pov_card.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 import 'package:jumia_clone/features/shop/screens/sellers/seller_profile/widgets/seller_score.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/products/rating/rating_indicator.dart';
 import '../../../../../common/widgets/texts/section_heading.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
-import 'package:readmore/readmore.dart';
-
 import '../../product_details/product_details.dart';
 
 class SellerProfile extends StatelessWidget {
@@ -71,7 +70,7 @@ class SellerProfile extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 4.0),
                             // Padding
-        
+
                             side: const BorderSide(
                               color: TColors.primaryColor, // Border color
                             ),
@@ -99,8 +98,8 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 12.0),
                 color: isDark ? TColors.kBlack : TColors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,16 +162,16 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 18.0),
                 child: TSectionHeading(
                   title: "INFORMATION about the seller",
                   textColor: isDark ? TColors.white : TColors.kDarkGrey,
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 12.0),
                 color: isDark ? TColors.kBlack : TColors.white,
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,20 +203,149 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 18.0),
                 child: TSectionHeading(
                   title: "POV ABOUT THE PRODUCTS",
                   textColor: isDark ? TColors.white : TColors.kDarkGrey,
                 ),
               ),
-              ProductPovCard(productName: 'Iphone 13 promax', reviewDate: '12 jan, 2024', reviewTitle: 'was good', reviewText: 'the product was delivered fast and as mentioned in the description best seler', client: 'yacine', isVerified: true, rating: 4,),
-              ProductPovCard(productName: 'Iphone 14 pro', reviewDate: '12 feb, 2024', reviewTitle: 'nice product', reviewText: 'the product was delivered fast and as mentioned in the description best seler', client: 'mohammed',isVerified: true, rating: 4.3),
-              ProductPovCard(productName: 'hp elite book', reviewDate: '24 feb, 2024', reviewTitle: 'all good', reviewText: 'the product was delivered fast and as mentioned in the description best seler', client: 'karim',isVerified: true, rating: 4.5),
-              ProductPovCard(productName: 'headphones', reviewDate: '13 june, 2024', reviewTitle: 'perfectly done', reviewText: 'the product was delivered fast and as mentioned in the description best seler', client: 'nour',isVerified: false, rating: 3.8),
-
+              product_pov_card(),
+              product_pov_card(),
+              product_pov_card(),
+              product_pov_card(),
+              product_pov_card(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class product_pov_card extends StatelessWidget {
+  const product_pov_card({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = THelperFunctions.isDarkMode(context);
+
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => ProductDetails(
+              product: Product(
+                  productID: '',
+                  name: 'name',
+                  cover: 'cover',
+                  description: 'description',
+                  category: 'category',
+                  price: 2200,
+                  discount: 15,
+                  stock: 4,
+                  images: ['images'],
+                  rating: 5,
+                  reviews: [],
+                  createdAt: DateTime.now()),
+            ));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
+              color: isDark ? TColors.kBlack : TColors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 48,
+                        width: 48,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(width: 8.0),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("IPhone 15 pro max"),
+                          Row(
+                            children: [
+                              TRatingBarIndicator(rating: 4),
+                              Text(
+                                '02 jan, 2024',
+                                style: TextStyle(fontSize: 10.0),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  const ReadMoreText(
+                    "Good",
+                    trimLines: 1,
+                    trimMode: TrimMode.Line,
+                    trimExpandedText: 'show less',
+                    trimCollapsedText: 'show more',
+                    moreStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                    lessStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                  ),
+                  const SizedBox(height: 8.0),
+                  const ReadMoreText(
+                    "the product is very good and the delivery was fast the product is very good and the delivery was fast the product is very good and the delivery was fast ",
+                    trimLines: 1,
+                    trimMode: TrimMode.Line,
+                    trimExpandedText: 'show less',
+                    trimCollapsedText: 'show more',
+                    moreStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                    lessStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                  ),
+                  const SizedBox(height: 8.0),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "by yacine",
+                        style:
+                            TextStyle(fontSize: 12.0, color: TColors.kDarkGrey),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Iconsax.check, size: 14.0, color: Colors.green),
+                          SizedBox(width: 8.0),
+                          Text(
+                            "verified",
+                            style:
+                                TextStyle(fontSize: 12.0, color: Colors.green),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

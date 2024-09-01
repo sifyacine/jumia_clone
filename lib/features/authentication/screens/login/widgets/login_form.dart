@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/constants/text_strings.dart';
-import '../../../../../utils/validators/validation.dart';
-import '../../../controllers/login/login_controller.dart';
-import '../../password_configuration/forget_password.dart';
-import '../../signup/signup.dart';
+import 'package:jumia_clone/features/authentication/controllers/login/login_controller.dart';
+import 'package:jumia_clone/features/authentication/screens/password_configuration/forget_password.dart';
+import 'package:jumia_clone/features/authentication/screens/signup/signup.dart';
+import 'package:jumia_clone/utils/constants/colors.dart';
+import 'package:jumia_clone/utils/constants/sizes.dart';
+import 'package:jumia_clone/utils/constants/text_strings.dart';
+import 'package:jumia_clone/utils/validators/validation.dart';
 
 class TLoginForm extends StatelessWidget {
   const TLoginForm({
@@ -84,7 +84,8 @@ class TLoginForm extends StatelessWidget {
                     onPressed: () {
                       Get.to(() => const ForgetPassword());
                     },
-                    child: const Text(TTexts.forgetPassword, style: TextStyle(color: TColors.primaryColor)),
+                    child: const Text(TTexts.forgetPassword,
+                        style: TextStyle(color: TColors.primaryColor)),
                   )
                 ],
               ),

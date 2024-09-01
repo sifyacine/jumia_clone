@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 
 import '../../../../../common/widgets/custom_shapes/containers/rounded_container.dart';
 import '../../../../../common/widgets/images/circular_images.dart';
@@ -12,8 +13,9 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 
 class TProductMetaData extends StatelessWidget {
-  const TProductMetaData({super.key});
+  const TProductMetaData({super.key, required this.product});
 
+  final Product product;
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
@@ -22,8 +24,8 @@ class TProductMetaData extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         /// Title
-        const TProductTitleText(
-          title: 'Orange nike air jordan 4',
+        TProductTitleText(
+          title: product.name,
           textAlign: TextAlign.start,
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
@@ -40,7 +42,7 @@ class TProductMetaData extends StatelessWidget {
                 horizontal: TSizes.sm,
               ),
               child: Text(
-                '25%',
+                '${product.discount.toInt()}%',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
@@ -51,15 +53,17 @@ class TProductMetaData extends StatelessWidget {
 
             /// Original Price
             Text(
-              '\$300',
+              "${product.price.toInt()} DA",
               style: Theme.of(context).textTheme.titleSmall!.apply(
-                decoration: TextDecoration.lineThrough,
-              ),
+                    decoration: TextDecoration.lineThrough,
+                  ),
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
 
             /// Discounted Price
-            const TProductPricwText(price: '225'),
+            TProductPricwText(
+                price:
+                    '${(product.price - (product.price * (product.discount / 100))).toInt()} DA'),
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
@@ -75,9 +79,9 @@ class TProductMetaData extends StatelessWidget {
   }
 
   Widget _buildStatusRow(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
-        const TProductTitleText(
+        TProductTitleText(
           title: 'Status: ',
           textAlign: TextAlign.start,
         ),
@@ -99,8 +103,8 @@ class TProductMetaData extends StatelessWidget {
           backgroundColor: isDark ? TColors.kGrey : TColors.white,
         ),
         const SizedBox(width: TSizes.spaceBtwItems),
-        const TBrandTitleWithVerifiedIcon(
-          title: "Nike",
+        TBrandTitleWithVerifiedIcon(
+          title: product.category,
           brandTextSize: TextSizes.medium,
           textAlign: TextAlign.start,
         ),

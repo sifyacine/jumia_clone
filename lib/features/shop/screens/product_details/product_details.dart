@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/location_selection.dart';
 import 'package:jumia_clone/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
@@ -15,38 +16,43 @@ import '../../../../utils/helpers/helper_functions.dart';
 import '../product_reviews/product_reviews.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({Key? key}) : super(key: key);
-
+  const ProductDetails({Key? key, required this.product}) : super(key: key);
+  final Product product;
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
-      backgroundColor: isDark? TColors.dark : Colors.grey[200],
+      backgroundColor: isDark ? TColors.dark : Colors.grey[200],
       bottomNavigationBar: const TBottomAddToCart(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             /// Product image slider
-            const TProductImageSlider(),
+            TProductImageSlider(
+              images: product.images,
+              cover: product.cover,
+            ),
 
             /// Product details
             Column(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-                  color: isDark? Colors.black : Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 12),
+                  color: isDark ? Colors.black : Colors.white,
                   width: double.infinity,
-                  child: const Column(
+                  child: Column(
                     children: [
-
                       /// Price, title, stock, and brand
-                      TProductMetaData(),
+                      TProductMetaData(
+                        product: product,
+                      ),
 
-                      SizedBox(height: TSizes.spaceBtwItems),
+                      const SizedBox(height: TSizes.spaceBtwItems),
+
                       /// Attributes
-                      TProductAttributes(),
+                      const TProductAttributes(),
                     ],
                   ),
                 ),
@@ -60,24 +66,24 @@ class ProductDetails extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  color: isDark? Colors.black : Colors.white,
+                  color: isDark ? Colors.black : Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 24.0, vertical: 12.0),
-                  child: const Column(
+                  child: Column(
                     children: [
                       /// Description
-                      TSectionHeading(title: 'Description'),
-                      Divider(),
-                      SizedBox(height: TSizes.spaceBtwItems),
+                      const TSectionHeading(title: 'Description'),
+                      const Divider(),
+                      const SizedBox(height: TSizes.spaceBtwItems),
                       ReadMoreText(
-                        'This is a product description for orange Nike Air Jordan less vest. There are more, this is just a demo description just to test the functionality of it.',
+                        product.description,
                         trimLines: 2,
                         trimMode: TrimMode.Line,
                         trimCollapsedText: ' Show more',
                         trimExpandedText: ' less',
-                        moreStyle: TextStyle(
+                        moreStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w800),
-                        lessStyle: TextStyle(
+                        lessStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w800),
                       ),
                     ],
@@ -88,7 +94,7 @@ class ProductDetails extends StatelessWidget {
                 const SizedBox(height: TSizes.spaceBtwItems),
                 Container(
                   width: double.infinity,
-                  color: isDark? Colors.black : Colors.white,
+                  color: isDark ? Colors.black : Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 24.0, vertical: 8.0),
                   child: Row(
@@ -106,13 +112,13 @@ class ProductDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: Container(
                     width: double.infinity,
-                    color: isDark? Colors.black : Colors.white,
+                    color: isDark ? Colors.black : Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24.0, vertical: 12.0),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("any questions concerning the product?"),
@@ -121,7 +127,13 @@ class ProductDetails extends StatelessWidget {
                           children: [
                             Icon(Iconsax.messages, color: TColors.primaryColor),
                             SizedBox(width: 6.0),
-                            Text("contact us", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: TColors.primaryColor ),),
+                            Text(
+                              "contact us",
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: TColors.primaryColor),
+                            ),
                           ],
                         ),
                       ],
@@ -129,7 +141,6 @@ class ProductDetails extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),
-
               ],
             ),
           ],

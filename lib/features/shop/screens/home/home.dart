@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jumia_clone/features/products/controllers/product_controller.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 
 import '../../../../common/widgets/appbar/kappbar.dart';
 import '../../../../common/widgets/products/product_cards/simple_product_card.dart';
@@ -14,7 +16,10 @@ import '../all_products/all_products.dart';
 import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  // Initialize the ProductController
+  final ProductController productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -116,21 +121,25 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12),
                         child: SizedBox(
-                          height: 220,
-                          // Adjust height as needed for your design
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 6,
-                            itemBuilder: (_, index) => const SizedBox(
-                              width: 160, // Adjust width for each card
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: TSimpleProductCards(),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            height: 220,
+                            // Adjust height as needed for your design
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: productController.products.length,
+                                itemBuilder: (_, index) {
+                                  final Product product =
+                                      productController.products[index];
+                                  return SizedBox(
+                                    width: 160,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TSimpleProductCards(
+                                        product: product,
+                                      ),
+                                    ),
+                                  );
+                                })),
+                      )
                     ]),
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
@@ -155,20 +164,24 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12),
                         child: SizedBox(
-                          height: 220,
-                          // Adjust height as needed for your design
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder: (_, index) => const SizedBox(
-                              width: 160, // Adjust width for each card
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: TSimpleProductCards(),
-                              ),
-                            ),
-                          ),
-                        ),
+                            height: 220,
+                            // Adjust height as needed for your design
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: productController.products.length,
+                                itemBuilder: (_, index) {
+                                  final Product product =
+                                      productController.products[index];
+                                  return SizedBox(
+                                    width: 160,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TSimpleProductCards(
+                                        product: product,
+                                      ),
+                                    ),
+                                  );
+                                })),
                       ),
                     ]),
                   ),
@@ -197,20 +210,24 @@ class HomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 12),
                           child: SizedBox(
-                            height: 220,
-                            // Adjust height as needed for your design
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 3,
-                              itemBuilder: (_, index) => const SizedBox(
-                                width: 160, // Adjust width for each card
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TSimpleProductCards(),
-                                ),
-                              ),
-                            ),
-                          ),
+                              height: 220,
+                              // Adjust height as needed for your design
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: productController.products.length,
+                                  itemBuilder: (_, index) {
+                                    final Product product =
+                                        productController.products[index];
+                                    return SizedBox(
+                                      width: 160,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TSimpleProductCards(
+                                          product: product,
+                                        ),
+                                      ),
+                                    );
+                                  })),
                         ),
                       ],
                     ),
@@ -237,22 +254,31 @@ class HomeScreen extends StatelessWidget {
 
                           /// -- most requested
                           GridView.builder(
-                            // Makes the GridView not scrollable
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, // Number of columns
-                              mainAxisSpacing: 10, // Spacing between rows
-                              crossAxisSpacing: 10, // Spacing between columns
-                              childAspectRatio: 0.8, // Width to height ratio
-                            ),
-                            itemCount: 4,
-                            // Total number of cards
-                            itemBuilder: (context, index) {
-                              return const TSimpleProductCards(); // Your custom card widget
-                            },
-                          )
+                              // Makes the GridView not scrollable
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, // Number of columns
+                                mainAxisSpacing: 10, // Spacing between rows
+                                crossAxisSpacing: 10, // Spacing between columns
+                                childAspectRatio: 0.8, // Width to height ratio
+                              ),
+                              itemCount: productController.products.length,
+                              // Total number of cards
+                              itemBuilder: (_, index) {
+                                final Product product =
+                                    productController.products[index];
+                                return SizedBox(
+                                  width: 160,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TSimpleProductCards(
+                                      product: product,
+                                    ),
+                                  ),
+                                );
+                              })
                         ]),
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems),
@@ -275,22 +301,31 @@ class HomeScreen extends StatelessWidget {
 
                         /// -- most requested
                         GridView.builder(
-                          // Makes the GridView not scrollable
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // Number of columns
-                            mainAxisSpacing: 10, // Spacing between rows
-                            crossAxisSpacing: 10, // Spacing between columns
-                            childAspectRatio: 0.8, // Width to height ratio
-                          ),
-                          itemCount: 4,
-                          // Total number of cards
-                          itemBuilder: (context, index) {
-                            return const TSimpleProductCards(); // Your custom card widget
-                          },
-                        )
+                            // Makes the GridView not scrollable
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, // Number of columns
+                              mainAxisSpacing: 10, // Spacing between rows
+                              crossAxisSpacing: 10, // Spacing between columns
+                              childAspectRatio: 0.8, // Width to height ratio
+                            ),
+                            itemCount: productController.products.length,
+                            // Total number of cards
+                            itemBuilder: (_, index) {
+                              final Product product =
+                                  productController.products[index];
+                              return SizedBox(
+                                width: 160,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TSimpleProductCards(
+                                    product: product,
+                                  ),
+                                ),
+                              );
+                            })
                       ],
                     ),
                   ),
