@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+<<<<<<< HEAD
 import 'package:jumia_clone/utils/constants/text_strings.dart';
 
+=======
+import '../../../../../utils/constants/colors.dart';
+>>>>>>> 60daed2306204d61ae7037fb73cc9933f5a41473
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/validators/validation.dart';
 import '../../../controllers/login/login_controller.dart';
@@ -60,31 +64,34 @@ class TLoginForm extends StatelessWidget {
             ),
 
             /// remember me and forget password
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                /// remember me
-                Row(
-                  children: [
-                    Obx(
-                      () => Checkbox(
-                        value: controller.rememberMe.value,
-                        onChanged: (value) => controller.rememberMe.value =
-                            !controller.rememberMe.value,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  /// remember me
+                  Row(
+                    children: [
+                      Obx(
+                        () => Checkbox(
+                          value: controller.rememberMe.value,
+                          onChanged: (value) => controller.rememberMe.value =
+                              !controller.rememberMe.value,
+                        ),
                       ),
-                    ),
-                    const Text(TTexts.rememberMe),
-                  ],
-                ),
+                      const Text(TTexts.rememberMe),
+                    ],
+                  ),
 
-                /// forget password
-                TextButton(
-                  onPressed: () {
-                    Get.to(() => const ForgetPassword());
-                  },
-                  child: const Text(TTexts.forgetPassword),
-                )
-              ],
+                  /// forget password
+                  TextButton(
+                    onPressed: () {
+                      Get.to(() => const ForgetPassword());
+                    },
+                    child: const Text(TTexts.forgetPassword, style: TextStyle(color: TColors.primaryColor)),
+                  )
+                ],
+              ),
             ),
             const SizedBox(
               width: TSizes.spaceBtwSections,
