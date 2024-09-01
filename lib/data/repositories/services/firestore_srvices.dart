@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jumia_clone/features/products/models/product.dart';
 
 class FirestoreServices {
-  /// Collection reference to 'products'
   final CollectionReference productsCollection =
       FirebaseFirestore.instance.collection('products');
 
-  /// Function to add a new product to Firestore
+  /// Adds a new product to Firestore
   Future<void> addProduct(Product product) async {
     try {
       await productsCollection
@@ -18,7 +17,7 @@ class FirestoreServices {
     }
   }
 
-  /// Function to fetch a single product by productID
+  /// Fetches a single product by productID
   Future<Product?> getProductByID(String productID) async {
     try {
       DocumentSnapshot doc = await productsCollection.doc(productID).get();
@@ -34,7 +33,7 @@ class FirestoreServices {
     }
   }
 
-  /// Function to fetch all products
+  /// Fetches all products
   Future<List<Product>> getAllProducts() async {
     try {
       QuerySnapshot querySnapshot = await productsCollection.get();
@@ -47,7 +46,7 @@ class FirestoreServices {
     }
   }
 
-  /// Function to update a product by productID
+  /// Updates a product by productID
   Future<void> updateProduct(
       String productID, Map<String, dynamic> updatedData) async {
     try {
@@ -58,7 +57,7 @@ class FirestoreServices {
     }
   }
 
-  /// Function to delete a product by productID
+  /// Deletes a product by productID
   Future<void> deleteProduct(String productID) async {
     try {
       await productsCollection.doc(productID).delete();
@@ -68,13 +67,13 @@ class FirestoreServices {
     }
   }
 
-  /// Function to listen to real-time updates of all products
+  /// Listens to real-time updates of all products
   Stream<List<Product>> listenToProducts() {
     return productsCollection.snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Product.fromFirestore(doc)).toList());
   }
 
-  /// Function to get products by category
+  /// Fetches products by category
   Future<List<Product>> getProductsByCategory(String category) async {
     try {
       QuerySnapshot querySnapshot =
@@ -88,7 +87,7 @@ class FirestoreServices {
     }
   }
 
-  /// Function to search products by name
+  /// Searches products by name
   Future<List<Product>> searchProductsByName(String searchQuery) async {
     try {
       QuerySnapshot querySnapshot = await productsCollection

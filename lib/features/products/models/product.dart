@@ -5,6 +5,7 @@ class Product {
   String name;
   String description;
   String category;
+  String cover;
   double price;
   double discount;
   int stock;
@@ -16,6 +17,7 @@ class Product {
   Product({
     required this.productID,
     required this.name,
+    required this.cover,
     required this.description,
     required this.category,
     required this.price,
@@ -28,13 +30,14 @@ class Product {
   });
 
   factory Product.fromFirestore(DocumentSnapshot doc) {
-    Map data = doc.data() as Map<String, dynamic>;
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Product(
       productID: data['productID'] ?? '',
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       category: data['category'] ?? '',
+      cover: data['cover'] ?? '',
       price: data['price']?.toDouble() ?? 0.0,
       discount: data['discount']?.toDouble() ?? 0.0,
       stock: data['stock'] ?? 0,
@@ -55,6 +58,7 @@ class Product {
       'description': description,
       'category': category,
       'price': price,
+      'cover': cover,
       'discount': discount,
       'stock': stock,
       'images': images,
