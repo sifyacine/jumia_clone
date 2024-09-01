@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jumia_clone/features/products/models/product.dart';
 import 'package:jumia_clone/features/shop/screens/sellers/seller_profile/widgets/seller_score.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/products/rating/rating_indicator.dart';
 import '../../../../../common/widgets/texts/section_heading.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
-import 'package:readmore/readmore.dart';
-
 import '../../product_details/product_details.dart';
 
 class SellerProfile extends StatelessWidget {
@@ -70,7 +70,7 @@ class SellerProfile extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 4.0),
                             // Padding
-        
+
                             side: const BorderSide(
                               color: TColors.primaryColor, // Border color
                             ),
@@ -98,8 +98,8 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 12.0),
                 color: isDark ? TColors.kBlack : TColors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,16 +162,16 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 18.0),
                 child: TSectionHeading(
                   title: "INFORMATION about the seller",
                   textColor: isDark ? TColors.white : TColors.kDarkGrey,
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18.0, vertical: 12.0),
                 color: isDark ? TColors.kBlack : TColors.white,
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,8 +203,8 @@ class SellerProfile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 18.0),
                 child: TSectionHeading(
                   title: "POV ABOUT THE PRODUCTS",
                   textColor: isDark ? TColors.white : TColors.kDarkGrey,
@@ -228,14 +228,27 @@ class product_pov_card extends StatelessWidget {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: (){
-        Get.to(() => const ProductDetails());
+      onTap: () {
+        Get.to(() => ProductDetails(
+              product: Product(
+                  productID: '',
+                  name: 'name',
+                  cover: 'cover',
+                  description: 'description',
+                  category: 'category',
+                  price: 2200,
+                  discount: 15,
+                  stock: 4,
+                  images: ['images'],
+                  rating: 5,
+                  reviews: [],
+                  createdAt: DateTime.now()),
+            ));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
@@ -243,8 +256,8 @@ class product_pov_card extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 18.0, vertical: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12.0),
               color: isDark ? TColors.kBlack : TColors.white,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,8 +295,14 @@ class product_pov_card extends StatelessWidget {
                     trimMode: TrimMode.Line,
                     trimExpandedText: 'show less',
                     trimCollapsedText: 'show more',
-                    moreStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: TColors.primaryColor),
-                    lessStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: TColors.primaryColor),
+                    moreStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                    lessStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
                   ),
                   const SizedBox(height: 8.0),
                   const ReadMoreText(
@@ -292,8 +311,14 @@ class product_pov_card extends StatelessWidget {
                     trimMode: TrimMode.Line,
                     trimExpandedText: 'show less',
                     trimCollapsedText: 'show more',
-                    moreStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: TColors.primaryColor),
-                    lessStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: TColors.primaryColor),
+                    moreStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
+                    lessStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: TColors.primaryColor),
                   ),
                   const SizedBox(height: 8.0),
                   const Row(
@@ -301,18 +326,17 @@ class product_pov_card extends StatelessWidget {
                     children: [
                       Text(
                         "by yacine",
-                        style: TextStyle(
-                            fontSize: 12.0, color: TColors.kDarkGrey),
+                        style:
+                            TextStyle(fontSize: 12.0, color: TColors.kDarkGrey),
                       ),
                       Row(
                         children: [
-                          Icon(Iconsax.check,
-                              size: 14.0, color: Colors.green),
+                          Icon(Iconsax.check, size: 14.0, color: Colors.green),
                           SizedBox(width: 8.0),
                           Text(
                             "verified",
-                            style: TextStyle(
-                                fontSize: 12.0, color: Colors.green),
+                            style:
+                                TextStyle(fontSize: 12.0, color: Colors.green),
                           ),
                         ],
                       ),
