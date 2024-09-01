@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
+import '../../sellers/seller_profile/seller_profile.dart';
 
 class CustomSellerCard extends StatelessWidget {
   final String labelText;
@@ -27,7 +29,7 @@ class CustomSellerCard extends StatelessWidget {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: (){},
+      onTap: (){Get.to(() => const SellerProfile());},
       child: Card(
         color: isDark ? TColors.kBlack : TColors.white,
         child: Padding(
@@ -70,7 +72,7 @@ class CustomSellerCard extends StatelessWidget {
                       foregroundColor: Colors.white, backgroundColor: TColors.primaryColor, // Background color
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4.0), // Padding
 
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: TColors.primaryColor, // Border color
                       ),
                     ),
@@ -140,16 +142,16 @@ class CustomSellerCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    time+" Ago",
+                    "$time Ago",
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
-                    Row(
+                    const Row(
                       children: [
                         Icon(Iconsax.share, color: TColors.primaryColor, size: 18.0),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           "Share",
-                          style: const TextStyle(fontSize: 12, color: TColors.primaryColor),
+                          style: TextStyle(fontSize: 12, color: TColors.primaryColor),
                         ),
                       ],
                     ),
