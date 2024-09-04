@@ -6,7 +6,6 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../all_products/all_products.dart';
-import 'explore_card_widget.dart';
 
 class FollowingTab extends StatelessWidget {
   const FollowingTab({super.key});
