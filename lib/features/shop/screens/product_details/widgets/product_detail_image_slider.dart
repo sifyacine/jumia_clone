@@ -23,18 +23,12 @@ class TProductImageSlider extends StatelessWidget {
         color: isDark ? TColors.kDarkGrey : TColors.light,
         child: Stack(
           children: [
-            /// main large image
-            const SizedBox(
+            SizedBox(
                 height: 400,
                 child: Padding(
-                  padding: EdgeInsets.all(TSizes.productImageRadius * 2),
-                  child: Center(
-                      child: Image(
-                          image: NetworkImage(
-                              "https://img-api.mac4ever.com/1200/0/4d34091d9c_apple-iphone-15.png"))),
+                  padding: const EdgeInsets.all(TSizes.productImageRadius * 2),
+                  child: Center(child: Image(image: NetworkImage(cover))),
                 )),
-
-            /// image slider
             Positioned(
               right: 0,
               bottom: 30,
@@ -60,8 +54,6 @@ class TProductImageSlider extends StatelessWidget {
                 ),
               ),
             ),
-
-            /// App bar icons
             const TAppBar(
               showBackArrow: true,
               title: Text(

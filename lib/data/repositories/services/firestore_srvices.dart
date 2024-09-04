@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jumia_clone/features/products/models/category.dart';
 import 'package:jumia_clone/features/products/models/product.dart';
 
 class FirestoreServices {
-  final CollectionReference productsCollection =
+  final CollectionReference productsCollectionProducts =
       FirebaseFirestore.instance.collection('products');
+      
+  final CollectionReference categoriesCollectionCategories =
+      FirebaseFirestore.instance.collection('categories');
 
   /// Adds a new product to Firestore
   Future<void> addProduct(Product product) async {
     try {
-      await productsCollection
+      await productsCollectionProducts
           .doc(product.productID)
           .set(product.toFirestore());
       print('Product added successfully!');
@@ -20,7 +24,7 @@ class FirestoreServices {
   /// Fetches a single product by productID
   Future<Product?> getProductByID(String productID) async {
     try {
-      DocumentSnapshot doc = await productsCollection.doc(productID).get();
+      DocumentSnapshot doc = await productsCollectionProducts.doc(productID).get();
       if (doc.exists) {
         return Product.fromFirestore(doc);
       } else {
@@ -36,7 +40,7 @@ class FirestoreServices {
   /// Fetches all products
   Future<List<Product>> getAllProducts() async {
     try {
-      QuerySnapshot querySnapshot = await productsCollection.get();
+      QuerySnapshot querySnapshot = await productsCollectionProducts.get();
       return querySnapshot.docs
           .map((doc) => Product.fromFirestore(doc))
           .toList();
@@ -50,7 +54,7 @@ class FirestoreServices {
   Future<void> updateProduct(
       String productID, Map<String, dynamic> updatedData) async {
     try {
-      await productsCollection.doc(productID).update(updatedData);
+      await productsCollectionProducts.doc(productID).update(updatedData);
       print('Product updated successfully!');
     } catch (e) {
       print('Failed to update product: $e');
@@ -60,7 +64,7 @@ class FirestoreServices {
   /// Deletes a product by productID
   Future<void> deleteProduct(String productID) async {
     try {
-      await productsCollection.doc(productID).delete();
+      await productsCollectionProducts.doc(productID).delete();
       print('Product deleted successfully!');
     } catch (e) {
       print('Failed to delete product: $e');
@@ -69,7 +73,7 @@ class FirestoreServices {
 
   /// Listens to real-time updates of all products
   Stream<List<Product>> listenToProducts() {
-    return productsCollection.snapshots().map((snapshot) =>
+    return productsCollectionProducts.snapshots().map((snapshot) =>
         snapshot.docs.map((doc) => Product.fromFirestore(doc)).toList());
   }
 
@@ -77,7 +81,7 @@ class FirestoreServices {
   Future<List<Product>> getProductsByCategory(String category) async {
     try {
       QuerySnapshot querySnapshot =
-          await productsCollection.where('category', isEqualTo: category).get();
+          await productsCollectionProducts.where('category', isEqualTo: category).get();
       return querySnapshot.docs
           .map((doc) => Product.fromFirestore(doc))
           .toList();
@@ -90,7 +94,7 @@ class FirestoreServices {
   /// Searches products by name
   Future<List<Product>> searchProductsByName(String searchQuery) async {
     try {
-      QuerySnapshot querySnapshot = await productsCollection
+      QuerySnapshot querySnapshot = await productsCollectionProducts
           .where('name', isGreaterThanOrEqualTo: searchQuery)
           .where('name', isLessThanOrEqualTo: '$searchQuery\uf8ff')
           .get();
@@ -102,4 +106,70 @@ class FirestoreServices {
       return [];
     }
   }
+
+
+  /************************************************* */
+
+
+   // Fetches all categories
+  Future<List<Category>> getAllCategories() async {
+    try {
+      QuerySnapshot querySnapshot = await categoriesCollectionCategories.get();
+      return querySnapshot.docs
+          .map((doc) => Category.fromFirestore(doc))
+          .toList();
+    } catch (e) {
+      print('Failed to fetch categories: $e');
+      return [];
+    }
+  }
+
+    // Fetches a single category by categoryID
+  Future<Category?> getCategoryByID(String categoryID) async {
+    try {
+      DocumentSnapshot doc = await categoriesCollectionCategories.doc(categoryID).get();
+      if (doc.exists) {
+        return Category.fromFirestore(doc);
+      } else {
+        print('Category not found!');
+        return null;
+      }
+    } catch (e) {
+      print('Failed to fetch category: $e');
+      return null;
+    }
+  }
+
+  // Adds a new category to Firestore
+  Future<void> addCategory(Category category) async {
+    try {
+      await categoriesCollectionCategories
+          .doc(category.categoryID)
+          .set(category.toFirestore());
+      print('Category added successfully!');
+    } catch (e) {
+      print('Failed to add category: $e');
+    }
+  }
+
+  // Updates a category by categoryID
+  Future<void> updateCategory(String categoryID, Map<String, dynamic> updatedData) async {
+    try {
+      await categoriesCollectionCategories.doc(categoryID).update(updatedData);
+      print('Category updated successfully!');
+    } catch (e) {
+      print('Failed to update category: $e');
+    }
+  }
+
+  // Deletes a category by categoryID
+  Future<void> deleteCategory(String categoryID) async {
+    try {
+      await categoriesCollectionCategories.doc(categoryID).delete();
+      print('Category deleted successfully!');
+    } catch (e) {
+      print('Failed to delete category: $e');
+    }
+  }
 }
+

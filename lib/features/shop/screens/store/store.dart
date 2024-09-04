@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:jumia_clone/features/shop/screens/store/widgets/category_tab.dart'; // Update with correct path
-import 'package:jumia_clone/features/shop/screens/store/widgets/side_tab_bar.dart'; // Update with correct path
+import 'package:jumia_clone/features/shop/screens/store/widgets/side_tab_bar.dart';
+
 import '../../../../common/widgets/appbar/kappbar.dart';
-import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
-import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 

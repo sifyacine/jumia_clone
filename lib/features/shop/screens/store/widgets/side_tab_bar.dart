@@ -1,58 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jumia_clone/features/products/controllers/category_controller.dart';
+
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import 'category_tab.dart';
 
-class SideTabBar extends StatelessWidget {
-  SideTabBar({Key? key}) : super(key: key);
+class SideTabBar extends StatefulWidget {
+  const SideTabBar({super.key});
 
-  final SideTabBarController controller = Get.put(SideTabBarController());
+  @override
+  State<SideTabBar> createState() => _SideTabBarState();
+}
 
-  final List<String> categories = [
-    'PC',
-    'Phones',
-    'AirPods',
-    'Headphone',
-    'Laptops',
-    'Tablets',
-    'Monitors',
-    'Cameras',
-    'Keyboards',
-    'Mice',
-    'Speakers',
-    'Chargers',
-  ];
+class _SideTabBarState extends State<SideTabBar> {
+  final CategoryController categoryController = Get.put(CategoryController());
+  final SideTabBarController sideTabBarController =
+      Get.put(SideTabBarController());
 
-  // Define function to fetch section data based on the category
-  List<SectionConfig> getSectionsForCategory(String category) {
-    switch (category) {
-      case 'PC':
-        return [
-          SectionConfig(title: 'Gaming PCs', numberOfPictures: 6),
-          SectionConfig(title: 'Office PCs', numberOfPictures: 4),
-        ];
-      case 'Phones':
-        return [
-          SectionConfig(title: 'Smartphones', numberOfPictures: 8),
-          SectionConfig(title: 'Feature Phones', numberOfPictures: 3),
-        ];
-      case 'AirPods':
-        return [
-          SectionConfig(title: 'AirPods Pro', numberOfPictures: 4),
-          SectionConfig(title: 'AirPods Max', numberOfPictures: 2),
-        ];
-      case 'Headphone':
-        return [
-          SectionConfig(title: 'Wireless Headphones', numberOfPictures: 5),
-          SectionConfig(title: 'Noise Cancelling', numberOfPictures: 4),
-        ];
-    // Add similar cases for other categories
-      default:
-        return [
-          SectionConfig(title: 'Miscellaneous', numberOfPictures: 3),
-        ];
-    }
+  @override
+  void initState() {
+    super.initState();
+    // Fetch categories when the widget is initialized
+    categoryController.fetchCategories();
+  }
+
+  Future<void> _refreshCategories() async {
+    // Refresh the categories
+    await categoryController.fetchCategories();
   }
 
   @override
@@ -62,71 +37,99 @@ class SideTabBar extends StatelessWidget {
     // Get the screen width
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Row(
-      children: [
-        Container(
-          width: screenWidth * 0.25,
-          color: isDark ? TColors.dark : TColors.light,
-          child: ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  controller.changeIndex(index); // Update selected index
-                },
-                child: Obx(() => Container(
-                  color: controller.selectedIndex.value == index
-                      ? (isDark ? TColors.dark : TColors.light)
-                      : (isDark ? TColors.kBlack : TColors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 5.0),
-                    child: Row(
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          height: 60,
-                          width: 5,
-                          color: controller.selectedIndex.value == index
-                              ? TColors.primaryColor
-                              : Colors.transparent,
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            categories[index],
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10, // Set font size to 10
-                              color: controller.selectedIndex.value == index
-                                  ? TColors.primaryColor
-                                  : (isDark ? TColors.white : TColors.kBlack),
+    return Obx(() {
+      // Fetch category names from the controller
+      final categories = categoryController.categoryNames;
+
+      return RefreshIndicator(
+        onRefresh: _refreshCategories,
+        child: Row(
+          children: [
+            Container(
+              width: screenWidth * 0.25,
+              color: isDark ? TColors.dark : TColors.light,
+              child: ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      sideTabBarController
+                          .changeIndex(index); // Update selected index
+                    },
+                    child: Obx(() => Container(
+                          color:
+                              sideTabBarController.selectedIndex.value == index
+                                  ? (isDark ? TColors.dark : TColors.light)
+                                  : (isDark ? TColors.kBlack : TColors.white),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 5.0),
+                            child: Row(
+                              children: [
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 500),
+                                  height: 60,
+                                  width: 5,
+                                  color: sideTabBarController
+                                              .selectedIndex.value ==
+                                          index
+                                      ? TColors.primaryColor
+                                      : Colors.transparent,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    categories[index],
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10, // Set font size to 10
+                                      color: sideTabBarController
+                                                  .selectedIndex.value ==
+                                              index
+                                          ? TColors.primaryColor
+                                          : (isDark
+                                              ? TColors.white
+                                              : TColors.kBlack),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              );
-            },
-          ),
-        ),
-        Expanded(
-          child: Obx(() => Container(
-            color: isDark ? TColors.dark : TColors.light,
-            child: IndexedStack(
-              index: controller.selectedIndex.value,
-              children: categories.map((category) {
-                return TCategoryTab(
-                  sections: getSectionsForCategory(category),
-                );
-              }).toList(),
+                        )),
+                  );
+                },
+              ),
             ),
-          )),
+            Expanded(
+              child: Obx(() => Container(
+                    color: isDark ? TColors.dark : TColors.light,
+                    child: IndexedStack(
+                      index: sideTabBarController.selectedIndex.value,
+                      children: categories.map((category) {
+                        return TCategoryTab(
+                          sections: getSectionsForCategory(category),
+                        );
+                      }).toList(),
+                    ),
+                  )),
+            ),
+          ],
         ),
-      ],
-    );
+      );
+    });
+  }
+
+  // Define function to fetch section data based on the category
+  List<SectionConfig> getSectionsForCategory(String category) {
+    final subCategories =
+        categoryController.getSubCategoriesForCategory(category);
+    return subCategories
+        .map((subCategory) => SectionConfig(
+              title: subCategory,
+              numberOfPictures: 4,
+            ))
+        .toList();
   }
 }
 
