@@ -26,7 +26,7 @@ class AllBrands extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems,),
 
               /// brands
-              TGridLayout(itemCount: 6, mainAxisExtent: 80,itemBuilder: (context, index) => TBrandCard(showBorder: true, onTab: (){Get.to(() => const BrandProducts());},)),
+              TGridLayout(itemCount: 6, mainAxisExtent: 80,itemBuilder: (context, index) => TBrandCard(showBorder: true, onTab: (){Get.to(() => const BrandProducts());},), crossAxisCount: 3,),
 
             ],
           ),

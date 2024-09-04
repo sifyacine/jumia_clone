@@ -74,6 +74,7 @@ flutter:
 #--------------- LOCAL ASSETS ------------------#
   assets:
     - assets/logos/
+    - assets/data/wilayas_communes.json
     - assets/icons/brands/
     - assets/images/content/
     - assets/images/banners/

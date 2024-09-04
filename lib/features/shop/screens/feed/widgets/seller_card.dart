@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
-import '../../sellers/seller_profile/seller_profile.dart';
+import '../../sellers/seller_page/seller_page.dart';
 
 class CustomSellerCard extends StatelessWidget {
   final String labelText;
@@ -29,7 +29,7 @@ class CustomSellerCard extends StatelessWidget {
     final isDark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: (){Get.to(() => const SellerProfile());},
+      onTap: (){Get.to(() => SellerPage(sellerName: mainText,));},
       child: Card(
         color: isDark ? TColors.kBlack : TColors.white,
         child: Padding(

@@ -23,7 +23,7 @@ class WishlistPage extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TGridLayout(itemCount: 4, itemBuilder: (_, index) => const TProductCardsVertical(),)
+              TGridLayout(itemCount: 4, itemBuilder: (_, index) => const TProductCardsVertical(), crossAxisCount: 2,)
             ],
           ),
         ),

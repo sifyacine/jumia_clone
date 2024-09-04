@@ -5,6 +5,7 @@ import 'package:jumia_clone/features/products/controllers/product_controller.dar
 import 'package:jumia_clone/features/products/models/product.dart';
 
 import '../../../../common/widgets/appbar/kappbar.dart';
+import '../../../../common/widgets/layout/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/simple_product_card.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';
@@ -24,6 +25,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
+    List<String> imagePaths = [
+      TImages.productImage1,
+      TImages.productImage10,
+      TImages.productImage11,
+      TImages.productImage12,
+      TImages.productImage23,
+      TImages.productImage34,
+      TImages.productImage45,
+      TImages.productImage56,
+    ];
     return Scaffold(
       backgroundColor: isDark ? TColors.dark : Colors.blue[50],
       appBar: const KAppBar(),
@@ -51,10 +62,53 @@ class HomeScreen extends StatelessWidget {
                       TImages.promoBanner1,
                       TImages.promoBanner2,
                       TImages.promoBanner3,
-                      TImages.promoBanner3,
-                      TImages.promoBanner2,
-                      TImages.promoBanner1,
+                      TImages.banner3,
+                      TImages.banner2,
+                      TImages.banner1,
                     ],
+                  ),
+                ),
+                const SizedBox(height: TSizes.spaceBtwItems),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
+                  width: double.infinity,
+                  child: GridView.builder(
+                    shrinkWrap: true, // Makes the GridView occupy only the space it needs
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4, // Number of columns
+                      crossAxisSpacing: 10.0, // Horizontal spacing between items
+                      mainAxisSpacing: 10.0, // Vertical spacing between items
+                    ),
+                    itemCount: imagePaths.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // Handle item click, e.g., navigate to a new screen or show a dialog
+                          print('Item $index clicked');
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12), // Circular border radius
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3), // Shadow color and opacity
+                                spreadRadius: 2, // Shadow spread radius
+                                blurRadius: 4, // Shadow blur radius
+                                offset: Offset(0, 2), // Shadow offset
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12), // Match border radius for clipping
+                            child: Image.asset(
+                              imagePaths[index],
+                              fit: BoxFit.cover, // Adjusts the image to fit within the container
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: TSizes.spaceBtwItems),

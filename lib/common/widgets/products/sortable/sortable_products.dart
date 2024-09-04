@@ -38,7 +38,7 @@ class TSortableProducts extends StatelessWidget {
         ),
         TGridLayout(
             itemCount: 4,
-            itemBuilder: (_, index) => const TProductCardsVertical()),
+            itemBuilder: (_, index) => const TProductCardsVertical(), crossAxisCount: 2,),
       ],
     );
   }
