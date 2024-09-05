@@ -6,6 +6,7 @@ import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/texts/section_heading.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
+import '../../filtering/brand_filter.dart';
 import '../../filtering/price_filter.dart';
 import '../seller_profile/seller_profile.dart';
 
@@ -114,17 +115,25 @@ class SellerPage extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true, // Allows the bottom sheet to take a custom height
+                      builder: (BuildContext context) {
+                        return const BrandFilter();
+                      },
+                    );
+
+                  },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     color: isDark ? TColors.dark : TColors.light,
                     child: Row(
                       children: [
-                        const Text("Brand"),
-                        const SizedBox(width: 6.0),
+                        const Text("Brand"), // Added const for better performance
+                        const SizedBox(width: 6.0), // Added const for better performance
                         Icon(
-                          Iconsax.arrow_down_1,
+                          Iconsax.arrow_down_1, // Changed to a standard dropdown arrow icon
                           size: 18.0,
                           color: isDark ? TColors.white : TColors.kBlack,
                         ),
@@ -138,17 +147,11 @@ class SellerPage extends StatelessWidget {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true, // Allows the bottom sheet to take a custom height
-                      backgroundColor: isDark ? TColors.kBlack : TColors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                      ),
                       builder: (BuildContext context) {
-                        return const FractionallySizedBox(
-                          heightFactor: 0.3, // Adjust this factor to change the height of the bottom sheet
-                          child: PriceFilter(), // Show PriceFilter as a bottom sheet
-                        );
+                        return const PriceFilter();
                       },
                     );
+
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -158,7 +161,7 @@ class SellerPage extends StatelessWidget {
                         const Text("Price"), // Added const for better performance
                         const SizedBox(width: 6.0), // Added const for better performance
                         Icon(
-                          Icons.arrow_drop_down, // Changed to a standard dropdown arrow icon
+                          Iconsax.arrow_down_1, // Changed to a standard dropdown arrow icon
                           size: 18.0,
                           color: isDark ? TColors.white : TColors.kBlack,
                         ),

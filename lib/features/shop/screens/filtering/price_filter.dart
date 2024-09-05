@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../../utils/constants/colors.dart';
-import '../../../../utils/helpers/helper_functions.dart';
 
 class PriceFilter extends StatefulWidget {
   const PriceFilter({Key? key}) : super(key: key);
@@ -12,173 +9,163 @@ class PriceFilter extends StatefulWidget {
 }
 
 class _PriceFilterState extends State<PriceFilter> {
-  // Define the range for the slider
-  final RxDouble _minPrice = 0.0.obs;
-  final RxDouble _maxPrice = 10000.0.obs;
-
-  // Define the selected range
-  final Rx<RangeValues> _selectedRange = const RangeValues(0, 10000).obs;
-
-  // Controllers for the TextFields
-  final TextEditingController _startPriceController = TextEditingController();
-  final TextEditingController _endPriceController = TextEditingController();
+  RangeValues _currentRangeValues = const RangeValues(0, 10000000);
+  final TextEditingController _fromController = TextEditingController();
+  final TextEditingController _toController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // Initialize the TextField controllers with the current slider values
-    _startPriceController.text = _selectedRange.value.start.round().toString();
-    _endPriceController.text = _selectedRange.value.end.round().toString();
+    _fromController.text = _currentRangeValues.start.toString();
+    _toController.text = _currentRangeValues.end.toString();
   }
 
   @override
   void dispose() {
-    // Dispose of the controllers when the widget is disposed
-    _startPriceController.dispose();
-    _endPriceController.dispose();
+    _fromController.dispose();
+    _toController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = THelperFunctions.isDarkMode(context);
-    return Scaffold(
-      resizeToAvoidBottomInset: true, // Adjust for the keyboard
-      backgroundColor: isDark ? TColors.kBlack : TColors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Price(DA)"),
-                  Icon(Icons.cancel),
-                ],
-              ),
-              Obx(() {
-                return SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: 0.05, // Set the desired thickness here
-                    activeTrackColor: TColors.primaryColor, // Set active track color
-                    inactiveTrackColor: TColors.primaryColor.withOpacity(0.3), // Set inactive track color
-                    thumbColor: TColors.primaryColor, // Set thumb color
-                    overlayColor: TColors.primaryColor.withOpacity(0.2), // Set overlay color
-                  ),
-                  child: RangeSlider(
-                    values: _selectedRange.value,
-                    min: _minPrice.value,
-                    max: _maxPrice.value,
-                    divisions: 1000,
-                    labels: RangeLabels(
-                      _selectedRange.value.start.round().toString(),
-                      _selectedRange.value.end.round().toString(),
-                    ),
-                    onChanged: (RangeValues values) {
-                      _selectedRange.value = values;
-                      _startPriceController.text = values.start.round().toString();
-                      _endPriceController.text = values.end.round().toString();
-                    },
-                  ),
-                );
-
-
-              }),
-              Row(
-                children: [
-                  // Starting Price
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("From"),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: TColors.primaryColor),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: TextField(
-                            controller: _startPriceController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                              suffixText: "DA",
-                              border: InputBorder.none,
-                            ),
-                            onSubmitted: (value) {
-                              double startPrice = double.tryParse(value) ?? _minPrice.value;
-                              if (startPrice < _minPrice.value) startPrice = _minPrice.value;
-                              if (startPrice > _selectedRange.value.end) startPrice = _selectedRange.value.end;
-                              _selectedRange.value = RangeValues(startPrice, _selectedRange.value.end);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 16), // Space between the fields
-                  // Finishing Price
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("To"),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: TColors.primaryColor),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: TextField(
-                            controller: _endPriceController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                              suffixText: "DA",
-                              border: InputBorder.none,
-                            ),
-                            onSubmitted: (value) {
-                              double endPrice = double.tryParse(value) ?? _maxPrice.value;
-                              if (endPrice > _maxPrice.value) endPrice = _maxPrice.value;
-                              if (endPrice < _selectedRange.value.start) endPrice = _selectedRange.value.start;
-                              _selectedRange.value = RangeValues(_selectedRange.value.start, endPrice);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Cancel and go back
-                      },
-                      child: const Text("Cancel"),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Save the selected price range and go back
-                        // You can add your saving logic here
-                        Navigator.pop(context, _selectedRange.value);
-                      },
-                      child: const Text("Save"),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.35, // Increased height for better UX
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0), // Increased padding for better spacing
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)), // Rounded corners
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(context),
+            const SizedBox(height: 16.0),
+            _buildRangeSlider(),
+            const SizedBox(height: 16.0),
+            _buildPriceInputs(),
+            const SizedBox(height: 12),
+            _buildActionButtons(context),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          "Price (DA)",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        IconButton(
+          icon: const Icon(Icons.cancel),
+          onPressed: () => Navigator.pop(context), // Close the bottom sheet
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRangeSlider() {
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        trackHeight: 2.0,
+        activeTrackColor: TColors.primaryColor,
+        inactiveTrackColor: TColors.primaryColor.withOpacity(0.3),
+        thumbColor: TColors.primaryColor,
+        overlayColor: TColors.primaryColor.withOpacity(0.2),
+      ),
+      child: RangeSlider(
+        values: _currentRangeValues,
+        min: 0,
+        max: 100000000,
+        divisions: 1000,
+        labels: RangeLabels(
+          '${_currentRangeValues.start.round()} DA',
+          '${_currentRangeValues.end.round()} DA',
+        ),
+        onChanged: (RangeValues values) {
+          setState(() {
+            _currentRangeValues = values;
+            _fromController.text = values.start.round().toString();
+            _toController.text = values.end.round().toString();
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildPriceInputs() {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildPriceInputField("From", _fromController, (value) {
+            final double? newValue = double.tryParse(value);
+            if (newValue != null && newValue <= _currentRangeValues.end) {
+              setState(() {
+                _currentRangeValues = RangeValues(newValue, _currentRangeValues.end);
+              });
+            }
+          }),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildPriceInputField("To", _toController, (value) {
+            final double? newValue = double.tryParse(value);
+            if (newValue != null && newValue >= _currentRangeValues.start) {
+              setState(() {
+                _currentRangeValues = RangeValues(_currentRangeValues.start, newValue);
+              });
+            }
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPriceInputField(String label, TextEditingController controller, Function(String) onSubmitted) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label),
+        TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            suffixText: "DA",
+            border: OutlineInputBorder(),
+          ),
+          onSubmitted: onSubmitted,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: OutlinedButton(
+            onPressed: () => Navigator.pop(context), // Cancel and go back
+            child: const Text("Reset"),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              // Implement save functionality
+            },
+            child: const Text("Save"),
+          ),
+        ),
+      ],
     );
   }
 }
