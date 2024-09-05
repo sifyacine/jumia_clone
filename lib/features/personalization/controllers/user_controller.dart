@@ -8,6 +8,8 @@ import '../../authentication/models/user_model.dart';
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
+  var userEmail = ''.obs;  // Observable property for email
+
   // save user record
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
@@ -30,6 +32,9 @@ class UserController extends GetxController {
         // Get an instance of UserRepository and save user record
         final userRepository = Get.find<UserRepository>();
         await userRepository.saveUserRecord(user);
+
+        // Update userEmail observable
+        userEmail.value = userCredentials.user!.email ?? '';
       }
     } catch (e) {
       TLoaders.warningSnackBar(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:jumia_clone/features/shop/screens/feed/widgets/exploring_tab.dart';
 import 'package:jumia_clone/features/shop/screens/feed/widgets/following_tab.dart';
 import '../../../../common/widgets/products/cart/cart_menu_icon.dart';
+import '../../../../common/widgets/restricted_page_placeholder/restricted_page_placeholder.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/constants/colors.dart';
 
 class FeedPage extends StatelessWidget {
@@ -10,6 +13,8 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authController = Get.find<AuthenticationRepository>();
+    final userEmail = authController.auth.currentUser?.email;
     return DefaultTabController(
       length: 2, // Number of tabs
       child: Scaffold(
@@ -39,7 +44,8 @@ class FeedPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            FollowingTab(), // Replace with your content for Following tab
+            userEmail != null
+                ? FollowingTab() : RestrictedPagePlaceholder(title: 'You are not signed in', subtitle: 'Your should sign in to see the content of this page', imageUrl: '',), // Replace with your content for Following tab
             ExploringTab(), // Replace with your content for Exploring tab
           ],
         ),

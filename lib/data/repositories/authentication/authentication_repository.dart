@@ -6,7 +6,6 @@ import 'package:flutter/services.dart'; // For PlatformException
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../features/authentication/screens/login/login_screen.dart';
-import '../../../features/authentication/screens/onboarding/onboarding_screen.dart';
 import '../../../features/authentication/screens/signup/verify_email.dart';
 import '../../../navigation_menu.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
@@ -17,9 +16,14 @@ import '../../../utils/exceptions/platform_exceptions.dart';
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
+
+
+
   /// variables
   final deviceStorage = GetStorage();
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
+
+
 
   /// called from main.dart on app launch
 
@@ -29,23 +33,23 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  /// functions to show relevant screen
+  /// Function to show the navigation menu
   screenRedirect() async {
-    final user = _auth.currentUser;
+    final user = auth.currentUser;
+
     if (user != null) {
+      // If signed in and email is verified, take them to the main app
       if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
       } else {
-        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
+        Get.offAll(() => VerifyEmailScreen(email: user.email));
       }
     } else {
-      // local storage
-      deviceStorage.writeIfNull("isFirstTime", true);
-      deviceStorage.read("isFirstTime") != true
-          ? Get.offAll(() => const LoginScreen())
-          : Get.offAll(() => const OnBoardingScreen());
+      // Allow users to access the app without signing in
+      Get.offAll(() => const NavigationMenu());
     }
   }
+
 
   /*------------------------------ Email and password sign-in ------------------------------*/
 
@@ -53,7 +57,7 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
+      return await auth.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
@@ -73,7 +77,7 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
+      return await auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
@@ -92,7 +96,7 @@ class AuthenticationRepository extends GetxController {
   /// [EmailVerification] - mail verification
   Future<void> sendEmailVerification() async {
     try {
-      await _auth.currentUser?.sendEmailVerification();
+      await auth.currentUser?.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -110,7 +114,7 @@ class AuthenticationRepository extends GetxController {
   /// [EmailAuthnentication] - forgetpassword
   Future<void> sendPasswordResetEmail(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(email: email);
 
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
@@ -145,7 +149,7 @@ class AuthenticationRepository extends GetxController {
         idToken: googleAuth.idToken,
       );
 
-      return await _auth.signInWithCredential(credentials);
+      return await auth.signInWithCredential(credentials);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
