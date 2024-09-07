@@ -54,48 +54,60 @@ class AccountScreen extends StatelessWidget {
             children: [
               userEmail != null
                   ? Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(18),
-                    height: 80,
-                    width: double.infinity,
-                    color: TColors.dark,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Welcome Back",
-                            style: TextStyle(
-                                color: TColors.primaryColor,
-                                fontSize: 16)),
-                        Text(userEmail,
-                            style: const TextStyle(
-                                color: TColors.white, fontSize: 12)),
+                        Container(
+                          padding: const EdgeInsets.all(18),
+                          height: 80,
+                          width: double.infinity,
+                          color: TColors.dark,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Welcome Back",
+                                style: TextStyle(
+                                    color: TColors.primaryColor, fontSize: 14),
+                              ),
+                              Text(userEmail,
+                                  style: const TextStyle(
+                                      color: TColors.white, fontSize: 12)),
+                            ],
+                          ),
+                        ),
                       ],
-                    ),
-                  ),
-                ],
-              )
+                    )
                   : Container(
-                padding: const EdgeInsets.all(18),
-                height: 80,
-                width: double.infinity,
-                color: TColors.dark,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Please log in",
-                        style: TextStyle(
-                            color: TColors.white, fontSize: 12)),
-                    TextButton(
-                      onPressed: () {
-                        Get.to(() => const LoginScreen());
-                      },
-                      child: const Text("Sign In",
-                          style: TextStyle(color: TColors.primaryColor)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 8.0),
+                      width: double.infinity,
+                      color: TColors.dark,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Welcome Back",
+                            style: TextStyle(
+                                color: TColors.primaryColor, fontSize: 14),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text("Please log in",
+                                  style: TextStyle(
+                                      color: TColors.white, fontSize: 12)),
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(() => const LoginScreen());
+                                },
+                                child: const Text("Sign In",
+                                    style:
+                                        TextStyle(color: TColors.primaryColor)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 12.0),
@@ -113,9 +125,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const OrderScreen()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -125,9 +139,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const InboxPage()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -137,9 +153,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const RatingPage()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -149,9 +167,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const CouponsPage()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -161,9 +181,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const WishlistPage()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -173,9 +195,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const SellersList()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         TSettingsMenuTile(
@@ -206,9 +230,11 @@ class AccountScreen extends StatelessWidget {
                             Get.to(() => userEmail != null
                                 ? const AddressesScreen()
                                 : RestrictedPagePlaceholder(
-                              title: 'You re not signed in',
-                              subtitle: 'you should sign in to see the content of this page',
-                              imageUrl: '',));
+                                    title: 'You re not signed in',
+                                    subtitle:
+                                        'you should sign in to see the content of this page',
+                                    imageUrl: '',
+                                  ));
                           },
                         ),
                         if (userEmail != null) ...[
@@ -240,7 +266,7 @@ class AccountScreen extends StatelessWidget {
                         return AlertDialog(
                           title: const Text("Confirm Logout"),
                           content:
-                          const Text("Are you sure you want to log out?"),
+                              const Text("Are you sure you want to log out?"),
                           actions: [
                             TextButton(
                               child: const Text("Cancel",
@@ -253,7 +279,7 @@ class AccountScreen extends StatelessWidget {
                             TextButton(
                               child: const Text("Logout",
                                   style:
-                                  TextStyle(color: TColors.primaryColor)),
+                                      TextStyle(color: TColors.primaryColor)),
                               onPressed: () {
                                 // Call the logout method from your controller
                                 authController.logout();
@@ -268,7 +294,7 @@ class AccountScreen extends StatelessWidget {
                   child: const Text(
                     "Log out",
                     style:
-                    TextStyle(fontSize: 18.0, color: TColors.primaryColor),
+                        TextStyle(fontSize: 18.0, color: TColors.primaryColor),
                   ),
                 ),
               ] else
@@ -279,7 +305,7 @@ class AccountScreen extends StatelessWidget {
                   child: const Text(
                     "sign in",
                     style:
-                    TextStyle(fontSize: 18.0, color: TColors.primaryColor),
+                        TextStyle(fontSize: 18.0, color: TColors.primaryColor),
                   ),
                 ),
             ],

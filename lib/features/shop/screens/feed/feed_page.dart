@@ -20,7 +20,8 @@ class FeedPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          automaticallyImplyLeading: false, // Removes the leading back arrow
+          automaticallyImplyLeading: false,
+          // Removes the leading back arrow
           backgroundColor: TColors.dark,
           actions: [
             IconButton(
@@ -45,7 +46,13 @@ class FeedPage extends StatelessWidget {
         body: TabBarView(
           children: [
             userEmail != null
-                ? FollowingTab() : RestrictedPagePlaceholder(title: 'You are not signed in', subtitle: 'Your should sign in to see the content of this page', imageUrl: '',), // Replace with your content for Following tab
+                ? const FollowingTab()
+                : const RestrictedPagePlaceholder(
+                    title: 'You are not signed in',
+                    subtitle:
+                        'Your should sign in to see the content of this page',
+                    imageUrl: '',
+                  ), // Replace with your content for Following tab
             ExploringTab(), // Replace with your content for Exploring tab
           ],
         ),

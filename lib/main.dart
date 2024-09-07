@@ -6,12 +6,13 @@ import 'package:get_storage/get_storage.dart';
 
 import 'app.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
+import 'data/repositories/user/user_repository.dart'; // Import UserRepository
 import 'firebase_options.dart';
 
 Future<void> main() async {
   /// Add Widgets Binding
   final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   /// Init Local Storage
   await GetStorage.init();
@@ -21,7 +22,11 @@ Future<void> main() async {
 
   // Todo: Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
+      .then((FirebaseApp value) {
+    // Initialize both AuthenticationRepository and UserRepository
+    Get.put(AuthenticationRepository());
+    Get.put(UserRepository()); // Add this line
+  });
 
   // Todo: Initialize Authentication
 

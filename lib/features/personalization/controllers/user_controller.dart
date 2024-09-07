@@ -13,33 +13,35 @@ class UserController extends GetxController {
   // save user record
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        // Convert name to first and last name
-        final nameParts =
-        UserModel.namePorts(userCredentials.user!.displayName ?? "");
-        final userName =
-        UserModel.generateUserName(userCredentials.user!.displayName ?? "");
-
-        // Map data
+      if (userCredentials != null && userCredentials.user != null) {
         final user = UserModel(
-            id: userCredentials.user!.uid,
-            firstName: nameParts[0],
-            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-            username: userName,
-            email: userCredentials.user!.email ?? '',
-            phoneNumber: userCredentials.user!.phoneNumber ?? '');
+          id: userCredentials.user!.uid,
+          firstName: UserModel.namePorts(userCredentials.user!.displayName ?? "")[0],
+          lastName: UserModel.namePorts(userCredentials.user!.displayName ?? "").sublist(1).join(' '),
+          username: UserModel.generateUserName(userCredentials.user!.displayName ?? ""),
+          email: userCredentials.user!.email ?? '',
+          phoneNumber: userCredentials.user!.phoneNumber ?? '',
+        );
 
-        // Get an instance of UserRepository and save user record
         final userRepository = Get.find<UserRepository>();
         await userRepository.saveUserRecord(user);
 
-        // Update userEmail observable
         userEmail.value = userCredentials.user!.email ?? '';
+        TLoaders.successSnackBar(
+          title: "Data is saved",
+          message: "data have been saved successfully",
+        );
+      } else {
+        print("UserCredentials or user is null");
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print("Error saving user record: $e");
+      print("Stack trace: $stackTrace");
       TLoaders.warningSnackBar(
-          title: "Data not saved",
-          message: "Something went wrong while saving your information.");
+        title: "Data not saved",
+        message: "Something went wrong while saving your information.",
+      );
     }
   }
+
 }
